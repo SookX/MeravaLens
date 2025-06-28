@@ -6,15 +6,41 @@ const palette = {
         default: "#000"
     },
     text: {
-        default: "#fff"
+        default: "#DDE6ED",
+        dark: "#2c2e2f"
+    },
+    primary: {
+        main: "#6EACDA"
     }
+}
+
+const headingStyles = {
+    fontFamily: ["Aldrich", 'sans-serif'].join(",")
 }
 
 export const theme = createTheme({
     palette,
     typography: {
         allVariants: {
-            color: palette.text.default
+            color: palette.text.default,
+            fontFamily: ["Ubuntu", 'sans-serif'].join(",")
+        },
+        h1: { ...headingStyles },
+        h2: { ...headingStyles },
+        h3: { ...headingStyles },
+        h4: { ...headingStyles },
+        h5: { ...headingStyles }
+    },
+    shape: {
+        borderRadius: "20px"
+    },
+    components: {
+        MuiButton: {
+            styleOverrides: {
+                root: {
+                    padding: "8px 16px"
+                }
+            }
         }
     }
 })
