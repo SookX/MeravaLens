@@ -1,12 +1,27 @@
-import { Typography } from "@mui/material"
-import { useContext, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { Box, Button, Divider, Stack, styled, Typography } from "@mui/material"
+import { useContext, useEffect, useState } from "react"
+import { Link, useParams } from "react-router-dom"
 import { DataContext } from "../../context/DataContext"
+import { theme } from "../../theme/theme"
+import { CheckCircleOutline, HighlightOff } from "@mui/icons-material"
 
 const Activate = () => {
-    const { crud } = useContext(DataContext)
+    // Gets the url params
     const { uidb64, token } = useParams()
 
+
+
+    // Gets global data from the context
+    const { crud } = useContext(DataContext)
+
+
+
+    // Holds the error state
+    const [error, setError] = useState(null)
+
+
+
+    // Sends an activation request to the backend on init
     useEffect(() => {
         const activate = async () => {
             const response = await crud({
@@ -14,14 +29,108 @@ const Activate = () => {
                 method: "get"
             })
 
+            if(response.status !== 200) setError(response.response.data.error)
             console.log(response)
         }
 
         activate()
     }, [])
 
+
+
+    const Section = styled(Stack)(({theme})=>({
+        padding: `${theme.spacing(20)} ${theme.spacing(25)}`,
+        textAlign: "center",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: "100vh",
+        zIndex: 1
+    }))
+
+
+    const IconSuccess = styled(CheckCircleOutline)(({ theme })=>({
+        width: theme.spacing(20),
+        height: theme.spacing(20),
+        marginBottom: theme.spacing(2)
+    }))
+
+
+    const IconError = styled(HighlightOff)(({ theme })=>({
+        width: theme.spacing(20),
+        height: theme.spacing(20),
+        marginBottom: theme.spacing(2)
+    }))
+
+
+
+    const Circle = styled(Box)(({ theme })=>({
+        aspectRatio: "1 / 1",
+        border: `solid 1px ${theme.palette.text.dark}`,
+        borderRadius: "100%",
+        position: "absolute",
+        zIndex: 0
+    }))
+
+
+    const StyledDivider = styled(Divider)(({ theme })=>({
+        width: theme.spacing(6),
+        background: theme.palette.primary.main
+    }))
+
+
+
     return (
-        <Typography variant="h1">ACTIVATE</Typography>
+        <Box sx={{ position: "relative", overflow: "hidden" }}>
+            <Circle sx={{ top: "50%", left: "-20%", width: theme.spacing(100) }} />
+            <Circle sx={{ bottom: "55%", right: "-15%", width: theme.spacing(50) }} />
+            <Circle sx={{ top: "-50%", left: "15%", width: theme.spacing(50) }} />
+            <Section>
+                {
+                    error ?
+                    <IconError color="primary" />
+                    :
+                    <IconSuccess color="primary" />
+                }
+                <Typography mb={1} variant="h3" color="primary">
+                    {
+                        error ?
+                        'Error activating your account!'
+                        :
+                        'Your account is now active!'
+                    }
+                </Typography>
+                {
+                    error ?
+                    <Typography variant="body1">{error}</Typography>
+                    :
+                    <Typography variant="body1">Thank you for registering a <Typography variant="span" color="primary">Merava Lens</Typography> account. You may now login and use all of our services freely.</Typography>
+                }
+                <Typography mb={3} variant="body1">
+                    {
+                        error ?
+                        'Try again later.'
+                        :
+                        'We wish you the best experience!'
+                    }
+                </Typography>
+                
+                <Stack gap={1} direction="row" alignItems="center">
+                    <StyledDivider />
+                    <Link to={`${error ? '/' : '/login'}`}>
+                        <Button variant="outlined">
+                            {
+                                error ?
+                                'Home'
+                                :
+                                'Log in'
+                            }
+                        </Button>
+                    </Link>
+                    <StyledDivider />
+                </Stack>
+            
+            </Section>
+        </Box>
     )
 }
 
