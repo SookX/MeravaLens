@@ -1,6 +1,7 @@
 import { Stack, Box, Typography, Grid, styled, Button, Divider } from '@mui/material'
 import EarthCanva from './components/EarthScene/EarthScene'
 import { theme } from '../../theme/theme'
+import { Link } from 'react-router-dom'
 
 const Home = () => {
     const TextBox = styled(Box)(({ theme })=>({
@@ -63,7 +64,7 @@ const Home = () => {
                     <Typography variant="body1" sx={{ zIndex: "1" }} mb={1}>Your Gateway to Real-Time Environmental Intelligence</Typography>
                     <Typography variant="body1" sx={{ zIndex: "1" }} mb={6}>MeravaLens is a next-generation satellite platform that brings together the power of multiple APIs and advanced  AI models to provide comprehensive, real-time environmental data – all in one place.</Typography>
 
-                    <Button /*sx={{ alignSelf: "end", marginRight: "20px" }}*/ sx={{ alignSelf: "start" }} variant="outlined">Get started</Button>
+                    <Link to="/register"><Button sx={{ alignSelf: "start" }} variant="outlined">Get started</Button></Link>
                 </TextBox>
             </Grid>
             <Grid size="grow"><EarthCanva /></Grid>

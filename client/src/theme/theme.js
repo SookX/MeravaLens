@@ -3,7 +3,8 @@ import { createTheme } from "@mui/material"
 const palette = {
     mode: "dark",
     background: {
-        default: "#000"
+        default: "#000",
+        light: "#333333"
     },
     text: {
         default: "#DDE6ED",

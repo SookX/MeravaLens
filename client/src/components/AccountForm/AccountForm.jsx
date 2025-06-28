@@ -1,22 +1,73 @@
-import { Button, Stack, TextField } from "@mui/material"
+import { Box, Button, Card, Grid, InputAdornment, Stack, styled, TextField, Typography } from "@mui/material"
+import { theme } from "../../theme/theme"
+import satellite from "../../img/satellite.webp"
+import { Link } from "react-router-dom"
 
-const AccountForm = ({ inputs = [], handleSubmit = () => {} }) => {
+const AccountForm = ({ title = "", text = "", inputs = [], handleSubmit = () => {}, link = null }) => {
+    const Section = styled(Grid)(({ theme })=>({
+        minHeight: "100vh"
+    }))
+
+    const FormCard = styled(Card)(({ theme })=>({
+        padding: theme.spacing(6),
+        width: theme.spacing(80),
+        textAlign: "center",
+
+        backgroundColor: "transparent"
+    }))
+
+    const FormSection = styled(Stack)(({ theme })=>({
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100%"
+    }))
+
+    const Image = styled(Box)({
+        height: "100%",
+        backgroundImage: `url(${satellite})`,
+        backgroundSize: "cover"
+    })
+
     return (
-        <Stack>
-            {
-                inputs.map((input, i) => (
-                    <TextField
-                        key={i}
-                        type={input.type}
-                        variant="outlined"
-                        label={input.label}
-                        value={input.value}
-                        onChange={(e) => input.setValue(e.target.value)}
-                    />
-                ))
-            }
-            <Button variant="contained" onClick={handleSubmit}>Submit</Button>
-        </Stack>
+        <Section container>
+            <Grid size={5}>
+                <Image />
+            </Grid>
+            <Grid size="grow">
+                <FormSection>
+                    <FormCard>
+                        <Stack mb={4}>
+                            <Typography variant="h3" color="primary">{title}</Typography>
+                            <Typography variant="body1">{text}</Typography>
+                        </Stack>
+
+                        <Stack gap={2}>
+                            {
+                                inputs.map((input, i) => (
+                                    <TextField
+                                        key={i}
+                                        type={input.type}
+                                        variant="outlined"
+                                        label={input.label}
+                                        value={input.value}
+                                        onChange={(e) => input.setValue(e.target.value)}
+                                    />
+                                ))
+                            }
+                            <Button size="large" variant="contained" onClick={handleSubmit}>Submit</Button>
+                        </Stack>
+
+                        {
+                            link &&
+                            <Stack mt={2} justifyContent="center" direction="row" gap={1}>
+                                <Typography variant="body2">{link.text}</Typography>
+                                <Link to={link.link}><Typography color="primary" fontWeight="bold" variant="body2">{link.label}</Typography></Link>
+                            </Stack>
+                        }
+                    </FormCard>
+                </FormSection>
+            </Grid>
+        </Section>
     )
 }
 

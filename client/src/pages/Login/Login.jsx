@@ -38,7 +38,17 @@ const Login = () => {
     }
 
     return (
-        <AccountForm inputs={inputs} handleSubmit={handleSubmit} />
+        <AccountForm
+            title="Welcome back!"
+            text="Enter your credentials and get back to the exciting world of satellites."
+            inputs={inputs}
+            handleSubmit={handleSubmit}
+            link={{
+                link: "/register",
+                text: "You don't have an account?",
+                label: "Sign up"
+            }}
+        />
     )
 }
 
