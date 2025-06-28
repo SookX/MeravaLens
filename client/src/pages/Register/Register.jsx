@@ -1,75 +1,84 @@
-import { useContext, useState } from "react"
+import { useContext, useRef, useState } from "react"
 import AccountForm from "../../components/AccountForm/AccountForm"
 import { DataContext } from "../../context/DataContext"
 import { Email, Person, LockOutline } from '@mui/icons-material'
+import ActivateMessage from "./components/ActivateMessage/ActivateMessage"
 
 const Register = () => {
     // Gets global data from the context
     const { crud } = useContext(DataContext)
 
-    const [email, setEmail] = useState("")
-    const [username, setUsername] = useState("")
-    const [password, setPassword] = useState("")
-    const [confirmPassword, setConfirmPassword] = useState("")
+
+
+    // Holds the values for the form
+    const emailRef = useRef()
+    const usernameRef = useRef()
+    const passwordRef = useRef()
+    const confirmPasswordRef = useRef()
+    const [error, setError] = useState(null)
+    const [modal, setModal] = useState(false)
 
     const inputs = [
         {
             type: "email",
             label: "Email",
-            value: email,
-            setValue: setEmail,
-            // icon: (<Email />)
+            ref: emailRef
         },
         {
             type: "text",
             label: "Username",
-            value: username,
-            setValue: setUsername,
-            // icon: (<Person />)
+            ref: usernameRef
         },
         {
             type: "password",
             label: "Password",
-            value: password,
-            setValue: setPassword,
-            // icon: (<LockOutline />)
+            ref: passwordRef
         },
         {
             type: "password",
             label: "Confirm Password",
-            value: confirmPassword,
-            setValue: setConfirmPassword,
-            // icon: (<LockOutline />)
+            ref: confirmPasswordRef
         },
     ]
 
+
+    // Makes a register request to the backend
     const handleSubmit = async () => {
         const response = await crud({
-            url: "/register",
+            url: "/users/register/",
             method: "post",
             body: {
-                email,
-                username,
-                password,
-                confirmPassword
+                email: emailRef.current.value,
+                username: usernameRef.current.value,
+                password: passwordRef.current.value,
+                confirmPassword: confirmPasswordRef.current.value
             }
         })
+
+        if(response.status == 201) setModal(true)
+        else setError(response.response.data.error)
 
         console.log(response)
     }
 
+
+
     return (
-        <AccountForm
-            title="Make an account."
-            text="Make a Merava Lens account to get the latest satellite analysis."
-            inputs={inputs}
-            handleSubmit={handleSubmit}
-            link={{
-                link: "/login",
-                text: "Alredy have an account?",
-                label: "Log in"
-            }}
-        />
+        <>
+            <ActivateMessage open={modal} onClose={() => setModal(false)} /*email={emailRef.current.value}*/ email="velchev061@gmail.com" />
+            <AccountForm
+                title="Make an account."
+                text="Make a Merava Lens account to get the latest satellite analysis."
+                error={error}
+                inputs={inputs}
+                handleSubmit={handleSubmit}
+                link={{
+                    link: "/login",
+                    text: "Alredy have an account?",
+                    label: "Log in"
+                }}
+            />
+        </>
     )
 }
 

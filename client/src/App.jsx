@@ -5,6 +5,7 @@ import { theme } from "./theme/theme"
 import DataProvider from "./context/DataContext"
 import Register from "./pages/Register/Register"
 import Login from "./pages/Login/Login"
+import Activate from "./pages/Activate/Activate"
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/activate/:uidb64/:token" element={<Activate />} />
             </Routes>
           </DataProvider>
         </BrowserRouter>

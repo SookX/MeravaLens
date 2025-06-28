@@ -3,7 +3,7 @@ import { theme } from "../../theme/theme"
 import satellite from "../../img/satellite.webp"
 import { Link } from "react-router-dom"
 
-const AccountForm = ({ title = "", text = "", inputs = [], handleSubmit = () => {}, link = null }) => {
+const AccountForm = ({ title = "", text = "", error = null, inputs = [], handleSubmit = () => {}, link = null }) => {
     const Section = styled(Grid)(({ theme })=>({
         minHeight: "100vh"
     }))
@@ -39,6 +39,7 @@ const AccountForm = ({ title = "", text = "", inputs = [], handleSubmit = () => 
                         <Stack mb={4}>
                             <Typography variant="h3" color="primary">{title}</Typography>
                             <Typography variant="body1">{text}</Typography>
+                            { error && <Typography variant="body1" color="error">{error}</Typography> }
                         </Stack>
 
                         <Stack gap={2}>
@@ -49,8 +50,7 @@ const AccountForm = ({ title = "", text = "", inputs = [], handleSubmit = () => 
                                         type={input.type}
                                         variant="outlined"
                                         label={input.label}
-                                        value={input.value}
-                                        onChange={(e) => input.setValue(e.target.value)}
+                                        inputRef={input.ref}
                                     />
                                 ))
                             }
