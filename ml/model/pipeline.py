@@ -3,6 +3,7 @@ import torch.nn as nn
 from torch.utils.data import DataLoader
 from dataset.dataset import LoveDa
 from unet.model import UNet
+from unet.resunet import ResUNet
 
 from utils import load_config, train_step, save_model
 import os
@@ -31,7 +32,7 @@ print("[INFO] All data loaders have been successfully initialized.")
 
 
 # Initialize the model
-model = UNet(
+model = ResUNet(
     in_channels=config['model']['in_channels'],
     out_channels=config['model']['out_channels'],
     initial_feature=config['model']['initial_feature'],
@@ -42,9 +43,12 @@ print(f"[INFO] UNet model initialized with input channels={config['model']['in_c
       f"output channels={config['model']['out_channels']}, and moved to {device.type.upper()}.")
 
 
+
+
 optimizer = torch.optim.Adam(model.parameters(), float(config["training"]["learning_rate"]))
 classification_loss = nn.BCEWithLogitsLoss()
 segmentation_loss = nn.CrossEntropyLoss()
+scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.5)
 
 
-train_step(model, config["training"]["epochs"], optimizer, classification_loss, segmentation_loss, train_dataloder, val_dataloader, device)
+train_step(model, config["training"]["epochs"], optimizer, classification_loss, segmentation_loss, scheduler , train_dataloder, val_dataloader, device)

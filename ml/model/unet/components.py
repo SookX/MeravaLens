@@ -68,7 +68,11 @@ class TransposeConvBlock(nn.Module):
     def __init__(self, in_channels, out_channels, kernel_size = 2, stride = 2):
         super().__init__()
         self.transposed_conv = nn.ConvTranspose2d(in_channels, out_channels, kernel_size = kernel_size, stride=stride)
-        self.double_conv = DoubleConvBlock(in_channels=in_channels, out_channels=out_channels)
+        self.double_conv = None
+        if(in_channels == out_channels):
+            self.double_conv = DoubleConvBlock(in_channels=in_channels * 2, out_channels=out_channels)
+        else:
+            self.double_conv = DoubleConvBlock(in_channels=in_channels, out_channels=out_channels)
 
     def forward(self, x, skip_connection):
         x = self.transposed_conv(x)
