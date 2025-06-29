@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+from torchvision.models import resnet18
 
 class DoubleConvBlock(nn.Module):
     """
@@ -28,30 +29,7 @@ class DoubleConvBlock(nn.Module):
     
     def forward(self, x):
         return self.conv(x)
-    
-class FeedForwardBlock(nn.Module):
-    """
-    A fully connected feedforward classifier that flattens the spatial feature map 
-    and passes it through a two-layer MLP.
 
-    Typically used after the bottleneck in U-Net for high-level classification (e.g., domain type).
-
-    Args:
-        in_channels (int): Number of channels in the feature map.
-        height (int, optional): Height of the input feature map. Default is 64.
-        width (int, optional): Width of the input feature map. Default is 64.
-    """
-    def __init__(self, in_channels, height=32, width=32):
-        super().__init__()
-        self.flatten_dim = in_channels * height * width
-        self.fc = nn.Sequential(
-            nn.Flatten(),
-            nn.Linear(self.flatten_dim, 1),
-        )
-    
-    def forward(self, x):
-        return self.fc(x)
-    
 class TransposeConvBlock(nn.Module):
     """
     A decoder block that performs upsampling using a transposed convolution, 
@@ -80,15 +58,75 @@ class TransposeConvBlock(nn.Module):
         x = self.double_conv(x)
         return x
 
-if __name__ == "__main__":
-    in_channels = 64
-    out_channels = 32
-    x = torch.randn(1, in_channels, 32, 32)           
-    skip = torch.randn(1, in_channels, 64, 64)        
+class ResUNet(nn.Module):
+    def __init__(self, in_channels = 3, out_channels = 7, initial_feature = 32, steps = 4):
+        super().__init__()
+        resnet = resnet18(pretrained=True)
 
-    block = TransposeConvBlock(in_channels, out_channels)
-    output = block(x, skip)
+        self.encoder = nn.ModuleList([
+            nn.Sequential(resnet.conv1, resnet.bn1, resnet.relu),  
+            nn.Sequential(resnet.maxpool, resnet.layer1),          
+            resnet.layer2,                                        
+            resnet.layer3,                                         
+            resnet.layer4                                          
+        ])
 
-    
+        self.fc = nn.Sequential(
+            resnet.avgpool,    
+            nn.Flatten(),
+            nn.Linear(512, 1)
+        )
 
-    print("Output shape:", output.shape) 
+        self.decoder = nn.ModuleList([
+            TransposeConvBlock(512, 256),  
+            TransposeConvBlock(256, 128),  
+            TransposeConvBlock(128, 64),   
+            TransposeConvBlock(64, 64),   
+        ])
+
+        self.final_upsample = nn.ConvTranspose2d(64, 32, kernel_size=2, stride=2) 
+        self.out_conv = nn.Conv2d(32, out_channels, kernel_size=1)
+
+    def forward(self, x):
+        skip_connections = []
+
+        for layer in self.encoder:
+            x = layer(x)
+            skip_connections.append(x)
+
+        bottleneck = skip_connections.pop() 
+
+        label = self.fc(bottleneck)
+        x = bottleneck
+        skip_connections = skip_connections[::-1]
+
+        for i, decoder_block in enumerate(self.decoder):
+            skip = skip_connections[i]
+            x = decoder_block(x, skip)
+
+        x = self.final_upsample(x)  
+        output = self.out_conv(x)
+
+        return label, output
+
+
+    def forward(self, x):
+        skip_connections = []
+
+        for layer in self.encoder:
+            x = layer(x)
+            skip_connections.append(x)
+
+        bottleneck = skip_connections.pop()
+
+        label = self.fc(bottleneck) 
+        x = bottleneck
+        skip_connections = skip_connections[::-1]
+
+        for i, decoder_block in enumerate(self.decoder):
+            skip = skip_connections[i]
+            x = decoder_block(x, skip)
+
+        x = self.final_upsample(x)
+        output = self.out_conv(x)
+        return label, output

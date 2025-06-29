@@ -1,42 +1,40 @@
 import torch
 from unet.model import UNet
+from unet.resunet import ResUNet
 from utils import load_model, load_config
 from dataset.dataset import LoveDa
+import matplotlib.pyplot as plt
+
 
 config = load_config("./config.yaml")
 
 # Load model
-model = UNet(    in_channels=config['model']['in_channels'],
+model = ResUNet(    in_channels=config['model']['in_channels'],
     out_channels=config['model']['out_channels'],
     initial_feature=config['model']['initial_feature'],
     steps=config['model']['steps'])
-model = load_model(model, "unet-loveda-big")
+model = load_model(model, "resunet-loveda")
 
 # Load test dataset
 test_dataset = LoveDa("./dataset/dist", "test")
 
-image, _, label = test_dataset[25]
+image, _, label = test_dataset[15]
 
-import matplotlib.pyplot as plt
 
 model.eval()
 with torch.no_grad():
-    input_tensor = image.unsqueeze(0).to(next(model.parameters()).device)  # add to same device as model
+    input_tensor = image.unsqueeze(0).to(next(model.parameters()).device) 
     pred_cls, pred_seg = model(input_tensor)
     
-    # Classification prediction: handle binary or multi-class
     if pred_cls.dim() > 1:
         predicted_label = torch.argmax(pred_cls, dim=1).item()
     else:
         predicted_label = (pred_cls.squeeze() > 0.5).long().item()
     
-    # Segmentation prediction: argmax over channel dimension (assuming shape [B, C, H, W])
     predicted_mask = torch.argmax(pred_seg, dim=1).squeeze().cpu().numpy()
     
-    # Convert input tensor to numpy image (C,H,W) -> (H,W,C)
     img_np = image.permute(1, 2, 0).cpu().numpy()
 
-# Plot
 fig, axs = plt.subplots(1, 2, figsize=(12, 6))
 
 axs[0].imshow(img_np)
