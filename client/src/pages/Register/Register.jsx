@@ -4,6 +4,7 @@ import { DataContext } from "../../context/DataContext"
 import { Email, Person, LockOutline } from '@mui/icons-material'
 import FormPage from "../../components/FormPage/FormPage"
 import AuthenticationMessage from "../../components/AuthenticationMessage/AuthenticationMessage"
+import GoogleButton from "../../components/GoogleButton/GoogleButton"
 
 const Register = () => {
     // Gets global data from the context
@@ -87,6 +88,14 @@ const Register = () => {
                         label: "Log in"
                     }}
                     buttonLabel="Create my account"
+                    oauth={{
+                        component: (
+                            <GoogleButton
+                                setError={setError}
+                                text="signup_with"
+                            />
+                        )
+                    }}
                 />
             </FormPage>
         </>

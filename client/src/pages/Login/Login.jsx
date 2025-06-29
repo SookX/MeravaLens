@@ -2,6 +2,9 @@ import { useContext, useRef, useState } from "react"
 import AccountForm from "../../components/AccountForm/AccountForm"
 import { DataContext } from "../../context/DataContext"
 import FormPage from "../../components/FormPage/FormPage"
+import { GoogleLogin } from '@react-oauth/google'
+import { Box, Stack } from "@mui/material"
+import GoogleButton from "../../components/GoogleButton/GoogleButton"
 
 const Login = () => {
     // Gets global data from the context
@@ -69,6 +72,14 @@ const Login = () => {
                     label: "Sign up"
                 }}
                 buttonLabel="Log in to my account"
+                oauth={{
+                    component: (
+                        <GoogleButton
+                            setError={setError}
+                            text="signin_with"
+                        />
+                    )
+                }}
             />
         </FormPage>
     )

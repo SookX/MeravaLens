@@ -1,4 +1,4 @@
-import { Box, Button, Card, Grid, InputAdornment, Stack, styled, TextField, Typography } from "@mui/material"
+import { Box, Button, Card, Divider, Grid, InputAdornment, Stack, styled, TextField, Typography } from "@mui/material"
 import { theme } from "../../theme/theme"
 import satellite from "../../img/satellite.webp"
 import { Link } from "react-router-dom"
@@ -11,7 +11,8 @@ const AccountForm = ({
     forgotPassword = false,
     handleSubmit = () => {},
     buttonLabel = "Submit",
-    link = null
+    link = null,
+    oauth = null
 }) => {
 
     const FormCard = styled(Card)(({ theme })=>({
@@ -33,6 +34,10 @@ const AccountForm = ({
         paddingRight: theme.spacing(1),
         textDecoration: "underline",
         textAlign: "end"
+    }))
+
+    const StyledDivider = styled(Divider)(({ theme })=>({
+        margin: `${theme.spacing(3)} 0`
     }))
 
     return (
@@ -65,6 +70,16 @@ const AccountForm = ({
 
                 <Button sx={{ marginTop: 2 }} fullWidth size="large" variant="contained" onClick={handleSubmit}>{buttonLabel}</Button>
 
+                {
+                    oauth &&
+                    <>
+                        <StyledDivider>
+                            <Typography variant="body1">Or</Typography>
+                        </StyledDivider>
+                        {oauth.component}
+                    </>
+                }
+                
                 {
                     link &&
                     <Stack mt={2} justifyContent="center" direction="row" gap={1}>

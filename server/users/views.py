@@ -272,6 +272,7 @@ GOOGLE_OAUTH2 = os.getenv("SOCIAL_AUTH_GOOGLE_OAUTH2_KEY")
 @api_view(['POST'])
 def google_login(request):
     token = request.data.get('token')
+    print(token)
 
     try:
         idinfo = id_token.verify_oauth2_token(token, requests.Request(), GOOGLE_OAUTH2)
