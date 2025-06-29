@@ -1,10 +1,12 @@
+import os
+
 import torch
 import torch.nn as nn
 
-from components import DoubleConvBlock, FeedForwardBlock, TransposeConvBlock
+from .components import DoubleConvBlock, FeedForwardBlock, TransposeConvBlock
 
 class UNet(nn.Module):
-    def __init__(self, in_channels = 3, out_channels = 7, initial_feature = 64, steps = 4):
+    def __init__(self, in_channels = 3, out_channels = 7, initial_feature = 32, steps = 4):
         """
         U-Net model for semantic segmentation with an auxiliary feedforward classifier.
 
@@ -80,14 +82,19 @@ class UNet(nn.Module):
         
 
 if __name__ == "__main__":
-    batch_size = 64
+    batch_size = 8
     in_channels = 3
     out_channels = 7
-    height, width = 1024, 1024
+    height, width = 512, 512
 
     model = UNet(in_channels=in_channels, out_channels=out_channels).to("cuda")
 
     x = torch.randn(batch_size, in_channels, height, width).to("cuda")
+
+    
+    torch.cuda.empty_cache()
+    total_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
+    print(f'Total number of parameters: {total_params}')
 
     y = model(x)
 

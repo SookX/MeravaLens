@@ -3,6 +3,7 @@ from PIL import Image
 import numpy as np
 import torch
 from torch.utils.data import Dataset
+import matplotlib.pyplot as plt
 
 class LoveDa(Dataset):
     """
@@ -81,15 +82,19 @@ class LoveDa(Dataset):
         img_path, mask_path, label = self.samples[index]
 
         image = Image.open(img_path).convert("RGB")
+        image = image.resize((512, 512), Image.BILINEAR)
         image = np.array(image, dtype=np.float32) / 255.0
         image = torch.tensor(image).permute(2, 0, 1)
 
         mask = Image.open(mask_path).convert("L")
+        mask = mask.resize((512, 512), Image.NEAREST)
         mask = torch.tensor(np.array(mask), dtype=torch.long)
 
-        return image, mask, label
+
+        return image, mask, torch.tensor(label).to(torch.float32)
 
 
 if __name__ == "__main__":
     dataset = LoveDa("./dist", "train")
-    image, mask, label = dataset[150]
+    image, mask, label = dataset[0]
+

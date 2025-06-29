@@ -41,7 +41,7 @@ class FeedForwardBlock(nn.Module):
         height (int, optional): Height of the input feature map. Default is 64.
         width (int, optional): Width of the input feature map. Default is 64.
     """
-    def __init__(self, in_channels, height=64, width=64):
+    def __init__(self, in_channels, height=32, width=32):
         super().__init__()
         self.flatten_dim = in_channels * height * width
         self.fc = nn.Sequential(
@@ -84,5 +84,7 @@ if __name__ == "__main__":
 
     block = TransposeConvBlock(in_channels, out_channels)
     output = block(x, skip)
+
+    
 
     print("Output shape:", output.shape) 

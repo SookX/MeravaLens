@@ -1,0 +1,15 @@
+# Model configuration
+model:
+  in_channels: 3
+  out_channels: 8
+  initial_feature: 32
+  steps: 4
+
+# Training configuration
+training:
+  epochs: 15
+  batch_size: 4
+  learning_rate: 3e-4
+  device: "cuda"
+
+
