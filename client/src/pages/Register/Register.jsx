@@ -3,6 +3,7 @@ import AccountForm from "../../components/AccountForm/AccountForm"
 import { DataContext } from "../../context/DataContext"
 import { Email, Person, LockOutline } from '@mui/icons-material'
 import ActivateMessage from "./components/ActivateMessage/ActivateMessage"
+import FormPage from "../../components/FormPage/FormPage"
 
 const Register = () => {
     // Gets global data from the context
@@ -66,18 +67,20 @@ const Register = () => {
     return (
         <>
             <ActivateMessage open={modal} onClose={() => setModal(false)} /*email={emailRef.current.value}*/ email="velchev061@gmail.com" />
-            <AccountForm
-                title="Make an account."
-                text="Make a Merava Lens account to get the latest satellite analysis."
-                error={error}
-                inputs={inputs}
-                handleSubmit={handleSubmit}
-                link={{
-                    link: "/login",
-                    text: "Alredy have an account?",
-                    label: "Log in"
-                }}
-            />
+            <FormPage>
+                <AccountForm
+                    title="Make an account."
+                    text="Make a Merava Lens account to get the latest satellite analysis."
+                    error={error}
+                    inputs={inputs}
+                    handleSubmit={handleSubmit}
+                    link={{
+                        link: "/login",
+                        text: "Alredy have an account?",
+                        label: "Log in"
+                    }}
+                />
+            </FormPage>
         </>
     )
 }
