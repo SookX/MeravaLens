@@ -2,8 +2,8 @@ import { useContext, useRef, useState } from "react"
 import AccountForm from "../../components/AccountForm/AccountForm"
 import { DataContext } from "../../context/DataContext"
 import { Email, Person, LockOutline } from '@mui/icons-material'
-import ActivateMessage from "./components/ActivateMessage/ActivateMessage"
 import FormPage from "../../components/FormPage/FormPage"
+import AuthenticationMessage from "../../components/AuthenticationMessage/AuthenticationMessage"
 
 const Register = () => {
     // Gets global data from the context
@@ -66,7 +66,14 @@ const Register = () => {
 
     return (
         <>
-            <ActivateMessage open={modal} onClose={() => setModal(false)} /*email={emailRef.current.value}*/ email="velchev061@gmail.com" />
+            <AuthenticationMessage
+                open={modal}
+                onClose={() => setModal(false)}
+                title="Thanks for signing up!"
+                message="We've sent an activation email to:"
+                email={emailRef.current ? emailRef.current.value : null}
+                text="Once you're done activating your account, you can"
+            />
             <FormPage>
                 <AccountForm
                     title="Make an account."
@@ -79,6 +86,7 @@ const Register = () => {
                         text: "Alredy have an account?",
                         label: "Log in"
                     }}
+                    buttonLabel="Create my account"
                 />
             </FormPage>
         </>

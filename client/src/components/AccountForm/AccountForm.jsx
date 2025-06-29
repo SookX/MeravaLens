@@ -3,7 +3,16 @@ import { theme } from "../../theme/theme"
 import satellite from "../../img/satellite.webp"
 import { Link } from "react-router-dom"
 
-const AccountForm = ({ title = "", text = "", error = null, inputs = [], forgotPassword = false, handleSubmit = () => {}, link = null }) => {
+const AccountForm = ({ 
+    title = "",
+    text = "",
+    error = null,
+    inputs = [],
+    forgotPassword = false,
+    handleSubmit = () => {},
+    buttonLabel = "Submit",
+    link = null
+}) => {
 
     const FormCard = styled(Card)(({ theme })=>({
         padding: theme.spacing(6),
@@ -54,7 +63,7 @@ const AccountForm = ({ title = "", text = "", error = null, inputs = [], forgotP
                     <Link to="/forgot-password"><ForgotPassword variant="body1" color="primary">Forgot Password</ForgotPassword></Link>
                 }
 
-                <Button sx={{ marginTop: 2 }} fullWidth size="large" variant="contained" onClick={handleSubmit}>Submit</Button>
+                <Button sx={{ marginTop: 2 }} fullWidth size="large" variant="contained" onClick={handleSubmit}>{buttonLabel}</Button>
 
                 {
                     link &&

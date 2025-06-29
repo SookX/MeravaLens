@@ -54,21 +54,6 @@ const Login = () => {
 
 
 
-    // Sends a request to the backend for a password reset link
-    const handleForgotPassword = async () => {
-        const response = await crud({
-            url: "/users/forgot-password/",
-            method: "post",
-            body: {
-                email: emailRef.current.value
-            }
-        })
-        
-        console.log(response)
-    }
-
-
-
     return (
         <FormPage>
             <AccountForm
@@ -83,6 +68,7 @@ const Login = () => {
                     text: "You don't have an account?",
                     label: "Sign up"
                 }}
+                buttonLabel="Log in to my account"
             />
         </FormPage>
     )
