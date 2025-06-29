@@ -1,6 +1,7 @@
 import { useContext, useRef, useState } from "react"
 import AccountForm from "../../components/AccountForm/AccountForm"
 import { DataContext } from "../../context/DataContext"
+import FormPage from "../../components/FormPage/FormPage"
 
 const Login = () => {
     // Gets global data from the context
@@ -54,18 +55,22 @@ const Login = () => {
 
 
     return (
-        <AccountForm
-            title="Welcome back!"
-            text="Enter your credentials and get back to the exciting world of satellites."
-            error={error}
-            inputs={inputs}
-            handleSubmit={handleSubmit}
-            link={{
-                link: "/register",
-                text: "You don't have an account?",
-                label: "Sign up"
-            }}
-        />
+        <FormPage>
+            <AccountForm
+                title="Welcome back!"
+                text="Enter your credentials and get back to the exciting world of satellites."
+                error={error}
+                inputs={inputs}
+                forgotPassword={true}
+                handleSubmit={handleSubmit}
+                link={{
+                    link: "/register",
+                    text: "You don't have an account?",
+                    label: "Sign up"
+                }}
+                buttonLabel="Log in to my account"
+            />
+        </FormPage>
     )
 }
 
