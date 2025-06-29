@@ -76,7 +76,7 @@ def train_step(model, epochs, optimizer, classification_loss, segmentation_loss,
                 loss_cls = classification_loss(pred.squeeze(1), label)
                 loss_seg = segmentation_loss(output, output_mask)
 
-                loss = 8*loss_seg + loss_cls
+                loss = 25*loss_seg + 5*loss_cls
 
             optimizer.zero_grad()
             loss.backward()

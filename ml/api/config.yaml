@@ -1,0 +1,5 @@
+model:
+  in_channels: 3
+  out_channels: 8
+  initial_feature: 64
+  steps: 4

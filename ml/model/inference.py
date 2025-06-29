@@ -18,7 +18,7 @@ model = load_model(model, "resunet-loveda")
 # Load test dataset
 test_dataset = LoveDa("./dataset/dist", "test")
 
-image, _, label = test_dataset[65]
+image, _, label = test_dataset[15]
 
 
 model.eval()
