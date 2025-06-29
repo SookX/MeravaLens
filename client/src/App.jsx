@@ -9,6 +9,7 @@ import Activate from "./pages/Activate/Activate"
 import ResetPass from "./pages/ResetPass/ResetPass"
 import ForgotPass from "./components/ForgotPass/ForgotPass"
 import { GoogleOAuthProvider } from "@react-oauth/google"
+import Dashboard from "./pages/Dashboard/Dashboard"
 
 function App() {
   const clientId = import.meta.env.VITE_GOOGLE_OAUTH2
@@ -26,6 +27,7 @@ function App() {
                 <Route path="/activate/:uidb64/:token" element={<Activate />} />
                 <Route path="/forgot-password" element={<ForgotPass />} />
                 <Route path="/reset-password/:uidb64/:token" element={<ResetPass />} />
+                <Route path="/dashboard" element={<Dashboard />} />
               </Routes>
             </GoogleOAuthProvider>
           </DataProvider>
