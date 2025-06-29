@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from "react"
+import Map from "./components/Map"
 import { DataContext } from "../../context/DataContext"
-import { Typography } from "@mui/material"
-import Map from "./components/Map/Map"
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import { Box, Divider, styled, Typography } from "@mui/material"
+import { theme } from "../../theme/theme"
+import temp from "../../img/temp.png"
 
 const Dashboard = () => {
     const { crud } = useContext(DataContext)
@@ -10,6 +11,9 @@ const Dashboard = () => {
 
     // Holds the selected coordinates
     const [coords, setCoords] = useState(null)
+    const [analysis, setAnalysis] = useState(false)
+    const [image, setImage] = useState(null)
+    const [segmentedImage, setSegmentedImage] = useState(temp)
     
     
     
@@ -21,50 +25,63 @@ const Dashboard = () => {
             })
 
             console.log(response)
+            if(response.status == 200) {
+                setAnalysis(true)
+                setImage(response.data.map_image_url)
+            }
         }
 
-        if(coords) {
-            console.log(coords)
-            fetching()
-        }
+        if(coords) fetching()
     }, [coords])
 
 
-    const key = import.meta.env.VITE_GOOGLE_API_KEY
 
-    // Stores map settings
-    const mapStyles = {
-        height: "100vh",
-        width: "100%",
-        osition: "absolute",
-        top: 0,
-        left: 0
+    const StyledContainer = styled(Box)(({ theme })=>({
+        borderRadius: theme.shape.borderRadius,
+        overflow: "hidden"
+    }))
 
-    };
-    const defaultCenter = {
-        lat: 42.698334, // Latitude of default location (Sofia)
-        lng: 23.319941 // Longitude of default location
-    };
 
-    const handleSelectCoords = (e) => {
-        setCoords({ lat: e.latLng.lat(), lng: e.latLng.lng() })
-    }
+
+    const MapSection = styled(Box)(({ theme })=>({
+        width: "50%",
+        margin: "0 auto"
+    }))
+
+
+
+    const StyledDivider = styled(Divider)(({ theme })=>({
+        "&::before, &::after": {
+            borderColor: theme.palette.text.default
+        }
+    }))
+
+
 
     return (
         <>
-            <LoadScript googleMapsApiKey={key}>
-                <GoogleMap
-                    mapContainerStyle={mapStyles}
-                    zoom={15}
-                    center={defaultCenter}
-                    onClick={(e) => handleSelectCoords(e)}
-                >
-                    {
-                        coords &&
-                        <Marker position={coords} />
-                    }
-                </GoogleMap>
-            </LoadScript>
+            <MapSection>
+                <Box mb={6}>
+                    <Box mb={4}>
+                        <StyledDivider><Typography textAlign={"center"} color="primary" variant="h2">Select a point</Typography></StyledDivider>
+                        <Typography textAlign="center" variant="body1">Click anywhere on the map and get a detailed analysis - segmented satellite picture as well as the latest weather and air pollution details.</Typography>
+                    </Box>
+
+                    <StyledContainer>
+                        <Map coords={coords} setCoords={setCoords} />
+                    </StyledContainer>
+                </Box>
+            </MapSection>
+
+            {
+                analysis &&
+                <Box sx={{ width: "50%", margin: "0 auto" }}>
+                    <Box sx={{ position: "relative" }}>
+                        <img className="sat-img" src={image} />
+                        <img className="sat-segm-img" src={segmentedImage} />
+                    </Box>
+                </Box>
+            }
         </>
     )
 }

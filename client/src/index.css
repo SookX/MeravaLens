@@ -12,3 +12,15 @@
 a {
     text-decoration: none;
 }
+
+.sat-img {
+    width: 100%;
+}
+
+.sat-segm-img {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 1;
+}
