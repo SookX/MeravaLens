@@ -3,7 +3,7 @@ import { theme } from "../../theme/theme"
 import satellite from "../../img/satellite.webp"
 import { Link } from "react-router-dom"
 
-const AccountForm = ({ title = "", text = "", error = null, inputs = [], handleSubmit = () => {}, link = null }) => {
+const AccountForm = ({ title = "", text = "", error = null, inputs = [], handleForgotPassword = null, handleSubmit = () => {}, link = null }) => {
     const Section = styled(Grid)(({ theme })=>({
         minHeight: "100vh"
     }))
@@ -27,6 +27,13 @@ const AccountForm = ({ title = "", text = "", error = null, inputs = [], handleS
         backgroundImage: `url(${satellite})`,
         backgroundSize: "cover"
     })
+
+    const ForgotPassword = styled(Typography)(({ theme })=>({
+        marginTop: theme.spacing(2),
+        paddingRight: theme.spacing(1),
+        textDecoration: "underline",
+        textAlign: "end"
+    }))
 
     return (
         <Section container>
@@ -54,8 +61,14 @@ const AccountForm = ({ title = "", text = "", error = null, inputs = [], handleS
                                     />
                                 ))
                             }
-                            <Button size="large" variant="contained" onClick={handleSubmit}>Submit</Button>
                         </Stack>
+
+                        {
+                            handleForgotPassword &&
+                            <ForgotPassword onClick={handleForgotPassword} variant="body1" color="primary">Forgot Password</ForgotPassword>
+                        }
+
+                        <Button sx={{ marginTop: 2 }} fullWidth size="large" variant="contained" onClick={handleSubmit}>Submit</Button>
 
                         {
                             link &&
