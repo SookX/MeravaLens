@@ -53,12 +53,28 @@ const Login = () => {
 
 
 
+    // Sends a request to the backend for a password reset link
+    const handleForgotPassword = async () => {
+        const response = await crud({
+            url: "/users/forgot-password/",
+            method: "post",
+            body: {
+                email: emailRef.current.value
+            }
+        })
+        
+        console.log(response)
+    }
+
+
+
     return (
         <AccountForm
             title="Welcome back!"
             text="Enter your credentials and get back to the exciting world of satellites."
             error={error}
             inputs={inputs}
+            handleForgotPassword={handleForgotPassword}
             handleSubmit={handleSubmit}
             link={{
                 link: "/register",
