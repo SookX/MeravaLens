@@ -68,7 +68,7 @@ class UNet(nn.Module):
             x = layer(x)
             skip_connections.append(x)
             x = self.pool(x)
-
+        
         x = self.bottleneck(x)
         label = self.ff(x) # Detects either Rural or Urban
         skip_connections = list(reversed(skip_connections))

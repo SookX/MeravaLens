@@ -86,9 +86,11 @@ class LoveDa(Dataset):
         image = np.array(image, dtype=np.float32) / 255.0
         image = torch.tensor(image).permute(2, 0, 1)
 
-        mask = Image.open(mask_path).convert("L")
-        mask = mask.resize((512, 512), Image.NEAREST)
-        mask = torch.tensor(np.array(mask), dtype=torch.long)
+        mask = None
+        if(self.data_split != "test"):
+            mask = Image.open(mask_path).convert("L")
+            mask = mask.resize((512, 512), Image.NEAREST)
+            mask = torch.tensor(np.array(mask), dtype=torch.long)
 
 
         return image, mask, torch.tensor(label).to(torch.float32)
