@@ -4,9 +4,10 @@ from torch.utils.data import DataLoader
 from dataset.dataset import LoveDa
 from unet.model import UNet
 
-from utils import load_config, train_step
+from utils import load_config, train_step, save_model
 import os
 os.environ["CUDA_LAUNCH_BLOCKING"] = "1"
+
 # Load the configuration file
 config = load_config("./config.yaml")
 
