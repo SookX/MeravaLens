@@ -8,21 +8,26 @@ import Login from "./pages/Login/Login"
 import Activate from "./pages/Activate/Activate"
 import ResetPass from "./pages/ResetPass/ResetPass"
 import ForgotPass from "./components/ForgotPass/ForgotPass"
+import { GoogleOAuthProvider } from "@react-oauth/google"
 
 function App() {
+  const clientId = import.meta.env.VITE_GOOGLE_OAUTH2
+
   return (
     <ThemeProvider theme={theme}>
       <Box bgcolor="background.default" sx={{ minWidth: "100vw", minHeight: "100vh" }}>
         <BrowserRouter>
           <DataProvider>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/activate/:uidb64/:token" element={<Activate />} />
-              <Route path="/forgot-password" element={<ForgotPass />} />
-              <Route path="/reset-password/:uidb64/:token" element={<ResetPass />} />
-            </Routes>
+            <GoogleOAuthProvider clientId={clientId}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/activate/:uidb64/:token" element={<Activate />} />
+                <Route path="/forgot-password" element={<ForgotPass />} />
+                <Route path="/reset-password/:uidb64/:token" element={<ResetPass />} />
+              </Routes>
+            </GoogleOAuthProvider>
           </DataProvider>
         </BrowserRouter>
       </Box>
