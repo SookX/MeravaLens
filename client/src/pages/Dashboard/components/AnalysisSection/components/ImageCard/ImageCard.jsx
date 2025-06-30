@@ -11,7 +11,8 @@ const ImageCard = () => {
 
 
     const StyledCard = styled(Card)(({ theme })=>({
-        padding: `${theme.spacing(4)} ${theme.spacing(4)}`
+        padding: `${theme.spacing(4)} ${theme.spacing(4)}`,
+        height: "100%"
     }))
 
 
