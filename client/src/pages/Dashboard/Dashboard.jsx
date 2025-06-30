@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import { DataContext } from "../../context/DataContext"
-import temp from "../../img/temp.png"
+// import temp from "../../img/temp.png"
 import MapSection from "./components/MapSection/MapSection"
 import AnalysisSection from "./components/AnalysisSection/AnalysisSection"
 import { Box, Container } from "@mui/material"
@@ -20,7 +20,7 @@ const Dashboard = () => {
     // Holds the analysis data
     const [analysis, setAnalysis] = useState(false)
     const [image, setImage] = useState(null)
-    const [segmentedImage, setSegmentedImage] = useState(temp)
+    const [segmentedImage, setSegmentedImage] = useState(null)
     const [weather, setWeather] = useState(null)
     const [airPollution, setAirPollution] = useState(null)
     const [summary, setSummary] = useState(null)
@@ -71,7 +71,8 @@ const Dashboard = () => {
 
             console.log(response)
             if(response.status == 200) {
-                setImage(response.data.map_image_url),
+                setImage(response.data.map_image_url)
+                setSegmentedImage(`data:image/jpeg;base64,${response.data.fastapi_result.segmentation_mask_base64}`)
                 setWeather(response.data.weather)
                 setAirPollution(response.data.air_pollution)
                 splitSummary(response.data.fastapi_result.analysis)

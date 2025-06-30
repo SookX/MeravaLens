@@ -19,8 +19,8 @@ const SummaryCard = () => {
     const Icon = styled(HelpOutline)(({ theme })=>({
         color: theme.palette.primary.main,
         cursor: "pointer",
-        width: theme.spacing(4),
-        height: theme.spacing(4)
+        width: theme.spacing(2),
+        height: theme.spacing(2)
     }))
 
 

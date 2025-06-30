@@ -67,7 +67,9 @@ def environmental_data(request):
             json=post_payload,
             # timeout=timeout
         )
+        print("dfeg")
         fastapi_response.raise_for_status()
+
 
         return Response({
             'location': {
