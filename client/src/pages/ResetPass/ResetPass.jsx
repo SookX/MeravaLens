@@ -14,7 +14,7 @@ const ResetPass = () => {
 
 
     // Gets global data from the context
-    const { crud, navigate } = useContext(DataContext)
+    const { crud, navigate, setLoading } = useContext(DataContext)
 
 
 
@@ -34,6 +34,8 @@ const ResetPass = () => {
 
     // Sends an reset password request to the backend on init
     const handleResetPassword = async () => {
+        setLoading(true)
+
         const response = await crud({
             url: `/users/reset-password/${uidb64}/${token}/`,
             method: "post",
@@ -43,8 +45,12 @@ const ResetPass = () => {
         })
 
         console.log(response)
+
+        
         if(response.status == 200) navigate('/login')
         else setError(response.response.data.error)
+    
+        setLoading(false)
     }
 
 

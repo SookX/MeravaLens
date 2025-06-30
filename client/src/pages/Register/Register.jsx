@@ -8,7 +8,7 @@ import GoogleButton from "../../components/GoogleButton/GoogleButton"
 
 const Register = () => {
     // Gets global data from the context
-    const { crud, access, navigate } = useContext(DataContext)
+    const { crud, access, navigate, setLoading } = useContext(DataContext)
 
 
 
@@ -53,6 +53,8 @@ const Register = () => {
 
     // Makes a register request to the backend
     const handleSubmit = async () => {
+        setLoading(true)
+
         const response = await crud({
             url: "/users/register/",
             method: "post",
@@ -68,6 +70,8 @@ const Register = () => {
         else setError(response.response.data.error)
 
         console.log(response)
+
+        setLoading(false)
     }
 
 

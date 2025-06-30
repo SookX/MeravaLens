@@ -7,7 +7,7 @@ export const DataContext = createContext({ })
 
 const DataProvider = ({ children }) => {
     // Sets the url for the backend server
-    axios.defaults.baseURL = 'https://meravalens.onrender.com/api'
+    axios.defaults.baseURL = 'http://127.0.0.1:8000/api'
 
 
 
@@ -17,8 +17,8 @@ const DataProvider = ({ children }) => {
 
 
     // Gets the JWT tokens if the user has logged in
-    const [refresh, setRefresh] = useState(localStorage.getItem('refresh') || null)
-    const [access, setAccess] = useState(localStorage.getItem('access') || null)
+    const [refresh, setRefresh] = useState(localStorage.getItem('refresh') || sessionStorage.getItem('refresh') || null)
+    const [access, setAccess] = useState(localStorage.getItem('access') || sessionStorage.getItem('access') || null)
 
 
 

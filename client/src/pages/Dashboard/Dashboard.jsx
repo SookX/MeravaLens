@@ -7,7 +7,7 @@ export const DashboardContext = createContext({  })
 
 const Dashboard = () => {
     // Gets global data from the context
-    const { crud, access, navigate } = useContext(DataContext)
+    const { crud, access, navigate, setLoading } = useContext(DataContext)
 
 
 
@@ -30,6 +30,16 @@ const Dashboard = () => {
     const [weather, setWeather] = useState(null)
     const [airPollution, setAirPollution] = useState(null)
     const [summary, setSummary] = useState(null)
+
+
+
+    // Resets the loading state
+    useEffect(() => {
+        if(image && segmentedImage && weather && airPollution && summary) {
+            setAnalysis(true)
+            setLoading(false)
+        }
+    }, [image, segmentedImage, weather, airPollution, summary])
 
 
 
@@ -70,6 +80,8 @@ const Dashboard = () => {
     
     useEffect(() => {
         const fetching = async () => {
+            setLoading(true)
+
             const response = await crud({
                 url: `/environment/?lat=${coords.lat}&lon=${coords.lng}`,
                 method: "get"
@@ -82,7 +94,6 @@ const Dashboard = () => {
                 setWeather(response.data.weather)
                 setAirPollution(response.data.air_pollution)
                 splitSummary(response.data.fastapi_result.analysis)
-                setAnalysis(true)
             }
         }
 

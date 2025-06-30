@@ -8,7 +8,7 @@ import GoogleButton from "../../components/GoogleButton/GoogleButton"
 
 const Login = () => {
     // Gets global data from the context
-    const { crud, access, setAccess, setRefresh, navigate } = useContext(DataContext)
+    const { crud, access, setAccess, setRefresh, navigate, setLoading } = useContext(DataContext)
 
 
 
@@ -42,6 +42,8 @@ const Login = () => {
 
     // Makes a login request to the backend
     const handleSubmit = async () => {
+        setLoading(true)
+
         const response = await crud({
             url: "/users/login/",
             method: "post",
@@ -66,6 +68,8 @@ const Login = () => {
         else setError(response.response.data.error)
 
         console.log(response)
+
+        setLoading(false)
     }
 
 
