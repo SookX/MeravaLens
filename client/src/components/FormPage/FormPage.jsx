@@ -5,14 +5,15 @@ import satellite from "../../img/satellite.webp"
 
 const FormPage = ({ children }) => {
     const Section = styled(Grid)(({ theme })=>({
-        minHeight: "100vh"
+        height: "100vh"
     }))
 
 
     const Image = styled(Box)({
-        height: "100%",
+        height: "100vh",
         backgroundImage: `url(${satellite})`,
-        backgroundSize: "cover"
+        backgroundSize: "cover",
+        backgroundPosition: "right"
     })
     
 
@@ -22,7 +23,9 @@ const FormPage = ({ children }) => {
                 <Image />
             </Grid>
             <Grid size="grow">
-                { children }
+                <Box sx={{ height: "100vh", overflow: "auto" }}>
+                    { children }
+                </Box>
             </Grid>
         </Section>
     )

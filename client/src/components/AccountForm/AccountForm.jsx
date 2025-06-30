@@ -25,7 +25,7 @@ const AccountForm = ({
     const FormSection = styled(Stack)(({ theme })=>({
         alignItems: "center",
         justifyContent: "center",
-        height: "100%"
+        padding: `${theme.spacing(16)} 0`,
     }))
 
     const ForgotPassword = styled(Typography)(({ theme })=>({

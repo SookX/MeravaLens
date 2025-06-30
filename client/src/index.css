@@ -8,11 +8,6 @@ body {
     overflow-x: hidden;
 }
 
-.account-img {
-    width: 100%;
-    object-fit: cover;
-}
-
 a {
     text-decoration: none;
 }
@@ -31,4 +26,8 @@ a {
 
 .weather-icon {
     width: 64px
+}
+
+.nav-logo {
+    width: 156px;
 }

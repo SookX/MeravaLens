@@ -7,6 +7,7 @@ const palette = {
         light: "#333333"
     },
     text: {
+        main: "#DDE6ED",
         default: "#DDE6ED",
         secondary: "#b1b8be",
         dark: "#2c2e2f"
@@ -45,12 +46,21 @@ export const theme = createTheme({
                 }
             }
         },
-        // MuiPaper: {
-        //     styleOverrides: {
-        //         elevation1: {
-        //             // boxShadow: `0 0 8px ${palette.text.dark}`
-        //         }
-        //     }
-        // }
+        MuiAppBar: {
+            styleOverrides: {
+                root: {
+                    boxShadow: "none"
+                }
+            }
+        }
     }
 })
+
+theme.components.MuiToolbar = {
+    styleOverrides: {
+        root: {
+            paddingLeft: theme.spacing(8),
+            paddingRight: theme.spacing(8),
+        }
+    }
+}
