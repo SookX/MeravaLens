@@ -3,6 +3,7 @@ import { DataContext } from "../../context/DataContext"
 import temp from "../../img/temp.png"
 import MapSection from "./components/MapSection/MapSection"
 import AnalysisSection from "./components/AnalysisSection/AnalysisSection"
+import { Box, Container } from "@mui/material"
 
 export const DashboardContext = createContext({  })
 

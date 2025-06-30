@@ -1,8 +1,9 @@
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import { useContext } from "react";
 import { DashboardContext } from "../../../../Dashboard";
+import { theme } from "../../../../../../theme/theme";
 
-const Map = () => {
+const Map = ({ mapHeight = 100 }) => {
     // Gets dashboard data
     const { coords, setCoords } = useContext(DashboardContext)
 
@@ -12,12 +13,12 @@ const Map = () => {
 
     // Stores map settings
     const mapStyles = {
-        minHeight: "500px",
+        minHeight: `${mapHeight}px`,
         width: "100%",
-        osition: "absolute",
+        position: "absolute",
         top: 0,
-        left: 0
-
+        left: 0,
+        borderRadius: theme.shape.borderRadius
     };
 
     const defaultCenter = {

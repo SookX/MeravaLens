@@ -5,7 +5,7 @@ import Atmosphere from "./components/Atmosphere/Atmosphere"
 import AirQuality from "./components/AirQuality/AirQuality"
 
 
-const DataCol = ({ airPollution }) => {
+const DataCol = () => {
     return (
         <Grid container spacing={2}>
             <Grid size={12}>

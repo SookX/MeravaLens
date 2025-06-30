@@ -3,6 +3,10 @@ import { theme } from "../../../../theme/theme"
 import Map from "./components/Map/Map"
 
 const MapSection = () => {
+    const mapHeight = 500
+
+
+
     const Section = styled(Box)(({ theme })=>({
         padding: `${theme.spacing(8)} ${theme.spacing(24)}`
     }))
@@ -18,10 +22,10 @@ const MapSection = () => {
 
 
     const StyledContainer = styled(Box)(({ theme })=>({
-        borderRadius: theme.shape.borderRadius,
-        overflow: "hidden",
         width: "75%",
-        margin: "0 auto"
+        margin: "0 auto",
+        position: "relative",
+        marginBottom: `${mapHeight + 100}px`
     }))
 
 
@@ -35,7 +39,7 @@ const MapSection = () => {
                 </Box>
 
                 <StyledContainer>
-                    <Map />
+                    <Map mapHeight={mapHeight} />
                 </StyledContainer>
             </Box>
         </Section>
