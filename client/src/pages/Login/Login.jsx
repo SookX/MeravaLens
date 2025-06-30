@@ -22,6 +22,7 @@ const Login = () => {
     // Holds the values for the form
     const emailRef = useRef()
     const passwordRef = useRef()
+    const rememberMeRef = useRef()
     const [error, setError] = useState(null)
 
     const inputs = [
@@ -51,9 +52,14 @@ const Login = () => {
         })
 
         if(response.status == 200) {
-            localStorage.setItem('access', response.data.token.access)
+            if(rememberMeRef.current.checked) {
+                localStorage.setItem('access', response.data.token.access)
+                localStorage.setItem('refresh', response.data.token.refresh)
+            } else {
+                sessionStorage.setItem('access', response.data.token.access)
+                sessionStorage.setItem('refresh', response.data.token.refresh)
+            }
             setAccess(response.data.token.access)
-            localStorage.setItem('refresh', response.data.token.refresh)
             setRefresh(response.data.token.refresh)
             navigate('/dashboard')
         }
@@ -72,6 +78,7 @@ const Login = () => {
                 error={error}
                 inputs={inputs}
                 forgotPassword={true}
+                rememberMeRef={rememberMeRef}
                 handleSubmit={handleSubmit}
                 link={{
                     link: "/register",

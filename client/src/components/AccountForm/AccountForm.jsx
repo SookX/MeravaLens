@@ -1,6 +1,5 @@
-import { Box, Button, Card, Divider, Grid, InputAdornment, Stack, styled, TextField, Typography } from "@mui/material"
+import { Button, Card, Checkbox, Divider, FormControlLabel, Stack, styled, TextField, Typography } from "@mui/material"
 import { theme } from "../../theme/theme"
-import satellite from "../../img/satellite.webp"
 import { Link } from "react-router-dom"
 
 const AccountForm = ({ 
@@ -9,12 +8,12 @@ const AccountForm = ({
     error = null,
     inputs = [],
     forgotPassword = false,
+    rememberMeRef = null,
     handleSubmit = () => {},
     buttonLabel = "Submit",
     link = null,
     oauth = null
 }) => {
-
     const FormCard = styled(Card)(({ theme })=>({
         padding: theme.spacing(6),
         width: theme.spacing(80),
@@ -30,7 +29,6 @@ const AccountForm = ({
     }))
 
     const ForgotPassword = styled(Typography)(({ theme })=>({
-        marginTop: theme.spacing(2),
         paddingRight: theme.spacing(1),
         textDecoration: "underline",
         textAlign: "end"
@@ -63,10 +61,22 @@ const AccountForm = ({
                     }
                 </Stack>
 
-                {
-                    forgotPassword &&
-                    <Link to="/forgot-password"><ForgotPassword variant="body1" color="primary">Forgot Password</ForgotPassword></Link>
-                }
+                <Stack mt={2} direction="row" alignItems="center" justifyContent="space-between">
+                    {
+                        rememberMeRef !== null &&
+                        <FormControlLabel 
+                            control={
+                                <Checkbox color="primary" inputRef={rememberMeRef} />
+                            } 
+                            label="Remember me" 
+                        />
+                    }
+
+                    {
+                        forgotPassword &&
+                        <Link to="/forgot-password"><ForgotPassword variant="body1" color="primary">Forgot Password</ForgotPassword></Link>
+                    }
+                </Stack>
 
                 <Button sx={{ marginTop: 2 }} fullWidth size="large" variant="contained" onClick={handleSubmit}>{buttonLabel}</Button>
 
