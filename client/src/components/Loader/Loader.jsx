@@ -4,7 +4,7 @@ import './loader.css'
 const Loader = () => {
     return (
         <Backdrop sx={(theme) => ({ backgroundColor: "black", zIndex: theme.zIndex.drawer + 1 })} open={true} onClose={() => {}}>
-            <div class="loader"></div>
+            <div className="loader"></div>
         </Backdrop>
     )
 }
