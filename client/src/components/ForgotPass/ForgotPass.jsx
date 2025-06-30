@@ -6,7 +6,7 @@ import AuthenticationMessage from "../AuthenticationMessage/AuthenticationMessag
 
 const ForgotPass = () => {
     // Gets global data from the context
-    const { crud } = useContext(DataContext)
+    const { crud, setLoading } = useContext(DataContext)
     
 
 
@@ -27,6 +27,8 @@ const ForgotPass = () => {
 
     // Sends a request to the backend for a password reset link
     const handleForgotPassword = async () => {
+        setLoading(true)
+
         const response = await crud({
             url: "/users/forgot-password/",
             method: "post",
@@ -39,6 +41,8 @@ const ForgotPass = () => {
 
         if(response.status == 200) setModal(true)
         else setError(response.response.data.error)
+
+        setLoading(false)
     }
 
 

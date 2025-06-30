@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
+import Loader from "../components/Loader/Loader";
 
 export const DataContext = createContext({ })
 
@@ -48,13 +49,20 @@ const DataProvider = ({ children }) => {
 
 
 
+    // Holds the loading state for the site
+    const [loading, setLoading] = useState(false)
+
+
+
     return (
         <DataContext.Provider
             value={{
                 crud, navigate,
-                access, setAccess, setRefresh
+                access, setAccess, setRefresh,
+                setLoading
             }}
         >
+            { loading && <Loader /> }
             {children}
         </DataContext.Provider>
     )

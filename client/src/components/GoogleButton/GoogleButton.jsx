@@ -5,13 +5,14 @@ import { DataContext } from "../../context/DataContext";
 
 const GoogleButton = ({ setError, text = "signin_with" }) => {
     // Gets global data from the context
-    const { crud, setAccess, setRefresh, navigate } = useContext(DataContext)
+    const { crud, setAccess, setRefresh, navigate, setLoading } = useContext(DataContext)
 
 
 
     // Google authentication logic
     const handleGoogleLoginSuccess = async (credentialResponse) => {
-        console.log(credentialResponse)
+        setLoading(true)
+
         const token = credentialResponse.credential;
 
         const response = await crud({
@@ -33,6 +34,8 @@ const GoogleButton = ({ setError, text = "signin_with" }) => {
         } else {
             setError('Google register failed.');
         }
+
+        setLoading(false)
     };
 
     const handleGoogleLoginFailure = () => {

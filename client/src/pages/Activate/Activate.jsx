@@ -12,7 +12,7 @@ const Activate = () => {
 
 
     // Gets global data from the context
-    const { crud, access, navigate } = useContext(DataContext)
+    const { crud, access, navigate, setLoading } = useContext(DataContext)
 
 
 
@@ -31,6 +31,8 @@ const Activate = () => {
     // Sends an activation request to the backend on init
     useEffect(() => {
         const activate = async () => {
+            setLoading(true)
+
             const response = await crud({
                 url: `/users/activate/${uidb64}/${token}/`,
                 method: "get"
@@ -38,6 +40,8 @@ const Activate = () => {
 
             if(response.status !== 200) setError(response.response.data.error)
             console.log(response)
+
+            setLoading(false)
         }
 
         activate()

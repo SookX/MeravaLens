@@ -10,6 +10,7 @@ import ResetPass from "./pages/ResetPass/ResetPass"
 import ForgotPass from "./components/ForgotPass/ForgotPass"
 import { GoogleOAuthProvider } from "@react-oauth/google"
 import Dashboard from "./pages/Dashboard/Dashboard"
+import Loader from "./components/Loader/Loader"
 
 function App() {
   const clientId = import.meta.env.VITE_GOOGLE_OAUTH2
