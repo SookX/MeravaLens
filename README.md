@@ -295,7 +295,7 @@ Start the microservice (FastAPI)
 ### :triangular_flag_on_post: Deployment
 
 The model is deployed at:  
-[your-deployment-url](https://your-deployment-url)
+[your-deployment-url](https://meravalens-client.onrender.com/)
 
 
 
