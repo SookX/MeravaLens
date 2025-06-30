@@ -1,9 +1,10 @@
-import { useContext, useEffect, useState } from "react"
-import Map from "./components/Map"
+import { createContext, useContext, useEffect, useState } from "react"
 import { DataContext } from "../../context/DataContext"
-import { Box, Divider, styled, Typography } from "@mui/material"
-import { theme } from "../../theme/theme"
 import temp from "../../img/temp.png"
+import MapSection from "./components/MapSection/MapSection"
+import AnalysisSection from "./components/AnalysisSection/AnalysisSection"
+
+export const DashboardContext = createContext({  })
 
 const Dashboard = () => {
     const { crud } = useContext(DataContext)
@@ -14,6 +15,8 @@ const Dashboard = () => {
     const [analysis, setAnalysis] = useState(false)
     const [image, setImage] = useState(null)
     const [segmentedImage, setSegmentedImage] = useState(temp)
+    const [weather, setWeather] = useState(null)
+    const [airPollution, setAirPollution] = useState(null)
     
     
     
@@ -27,7 +30,9 @@ const Dashboard = () => {
             console.log(response)
             if(response.status == 200) {
                 setAnalysis(true)
-                setImage(response.data.map_image_url)
+                setImage(response.data.map_image_url),
+                setWeather(response.data.weather)
+                setAirPollution(response.data.air_pollution)
             }
         }
 
@@ -36,53 +41,23 @@ const Dashboard = () => {
 
 
 
-    const StyledContainer = styled(Box)(({ theme })=>({
-        borderRadius: theme.shape.borderRadius,
-        overflow: "hidden"
-    }))
-
-
-
-    const MapSection = styled(Box)(({ theme })=>({
-        width: "50%",
-        margin: "0 auto"
-    }))
-
-
-
-    const StyledDivider = styled(Divider)(({ theme })=>({
-        "&::before, &::after": {
-            borderColor: theme.palette.text.default
-        }
-    }))
-
-
-
     return (
-        <>
-            <MapSection>
-                <Box mb={6}>
-                    <Box mb={4}>
-                        <StyledDivider><Typography textAlign={"center"} color="primary" variant="h2">Select a point</Typography></StyledDivider>
-                        <Typography textAlign="center" variant="body1">Click anywhere on the map and get a detailed analysis - segmented satellite picture as well as the latest weather and air pollution details.</Typography>
-                    </Box>
-
-                    <StyledContainer>
-                        <Map coords={coords} setCoords={setCoords} />
-                    </StyledContainer>
-                </Box>
-            </MapSection>
+        <DashboardContext.Provider
+            value={{
+                coords, setCoords,
+                weather,
+                airPollution,
+                image,
+                segmentedImage
+            }}
+        >
+            <MapSection />
 
             {
                 analysis &&
-                <Box sx={{ width: "50%", margin: "0 auto" }}>
-                    <Box sx={{ position: "relative" }}>
-                        <img className="sat-img" src={image} />
-                        <img className="sat-segm-img" src={segmentedImage} />
-                    </Box>
-                </Box>
+                <AnalysisSection />
             }
-        </>
+        </DashboardContext.Provider>
     )
 }
 

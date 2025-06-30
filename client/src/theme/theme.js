@@ -8,10 +8,12 @@ const palette = {
     },
     text: {
         default: "#DDE6ED",
+        secondary: "#b1b8be",
         dark: "#2c2e2f"
     },
     primary: {
-        main: "#6EACDA"
+        main: "#6EACDA",
+        dark: "#588aae"
     }
 }
 
@@ -42,6 +44,13 @@ export const theme = createTheme({
                     padding: "8px 16px"
                 }
             }
-        }
+        },
+        // MuiPaper: {
+        //     styleOverrides: {
+        //         elevation1: {
+        //             // boxShadow: `0 0 8px ${palette.text.dark}`
+        //         }
+        //     }
+        // }
     }
 })

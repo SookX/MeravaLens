@@ -1,6 +1,13 @@
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import { useContext } from "react";
+import { DashboardContext } from "../../../../Dashboard";
 
-const Map = ({ coords, setCoords = () => {} }) => {
+const Map = () => {
+    // Gets dashboard data
+    const { coords, setCoords } = useContext(DashboardContext)
+
+
+
     const key = import.meta.env.VITE_GOOGLE_API_KEY
 
     // Stores map settings
