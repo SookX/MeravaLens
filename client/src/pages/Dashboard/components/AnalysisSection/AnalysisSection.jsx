@@ -2,6 +2,7 @@ import { Grid, styled } from "@mui/material"
 import ImageCard from "./components/ImageCard/ImageCard"
 import DataCol from "./components/DataCol/DataCol"
 import { theme } from "../../../../theme/theme"
+import SummaryCard from "./components/SummaryCard/SummaryCard"
 
 
 const AnalysisSection = () => {
@@ -18,6 +19,9 @@ const AnalysisSection = () => {
             </Grid>
             <Grid size={"grow"}>
                 <DataCol />
+            </Grid>
+            <Grid size={12}>
+                <SummaryCard />
             </Grid>
             
         </StyledGrid>
