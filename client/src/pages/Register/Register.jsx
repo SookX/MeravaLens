@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import AccountForm from "../../components/AccountForm/AccountForm"
 import { DataContext } from "../../context/DataContext"
 import { Email, Person, LockOutline } from '@mui/icons-material'
@@ -8,7 +8,14 @@ import GoogleButton from "../../components/GoogleButton/GoogleButton"
 
 const Register = () => {
     // Gets global data from the context
-    const { crud } = useContext(DataContext)
+    const { crud, access, navigate } = useContext(DataContext)
+
+
+
+    // Checks if the user is already authenticated
+    useEffect(() => {
+        if(access) navigate('/dashboard')
+    }, [access])
 
 
 

@@ -12,7 +12,14 @@ const Activate = () => {
 
 
     // Gets global data from the context
-    const { crud } = useContext(DataContext)
+    const { crud, access, navigate } = useContext(DataContext)
+
+
+
+    // Checks if the user is already authenticated
+    useEffect(() => {
+        if(access) navigate('/dashboard')
+    }, [access])
 
 
 

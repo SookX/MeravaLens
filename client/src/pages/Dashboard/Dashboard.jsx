@@ -1,15 +1,21 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import { DataContext } from "../../context/DataContext"
-// import temp from "../../img/temp.png"
 import MapSection from "./components/MapSection/MapSection"
 import AnalysisSection from "./components/AnalysisSection/AnalysisSection"
-import { Box, Container } from "@mui/material"
-import { SignalWifiStatusbarNullOutlined } from "@mui/icons-material"
 
 export const DashboardContext = createContext({  })
 
 const Dashboard = () => {
-    const { crud } = useContext(DataContext)
+    // Gets global data from the context
+    const { crud, access, navigate } = useContext(DataContext)
+
+
+
+    // Checks if the user is authenticated
+    useEffect(() => {
+        if(!access) navigate('/login')
+    }, [access])
+
 
 
     // Holds the selected coordinates

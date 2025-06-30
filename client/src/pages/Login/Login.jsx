@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import AccountForm from "../../components/AccountForm/AccountForm"
 import { DataContext } from "../../context/DataContext"
 import FormPage from "../../components/FormPage/FormPage"
@@ -8,7 +8,14 @@ import GoogleButton from "../../components/GoogleButton/GoogleButton"
 
 const Login = () => {
     // Gets global data from the context
-    const { crud, setAccess, setRefresh, navigate } = useContext(DataContext)
+    const { crud, access, setAccess, setRefresh, navigate } = useContext(DataContext)
+
+
+
+    // Checks if the user is already authenticated
+    useEffect(() => {
+        if(access) navigate('/dashboard')
+    }, [access])
 
 
 
