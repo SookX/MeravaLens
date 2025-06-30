@@ -82,7 +82,7 @@ const Register = () => {
                 open={modal}
                 onClose={() => setModal(false)}
                 title="Thanks for signing up!"
-                message="We've sent an activation email to:"
+                message="We've sent an activation link to your email."
                 email={emailRef.current ? emailRef.current.value : null}
                 text="Once you're done activating your account, you can"
             />

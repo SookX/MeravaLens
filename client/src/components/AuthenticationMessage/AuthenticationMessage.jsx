@@ -30,13 +30,13 @@ const AuthenticationMessage = ({
                 <Typography variant="h3" color="primary" mb={2}>{title}</Typography>
                 <Typography variant="body1">{message}</Typography>
                 
-                {
+                {/* {
                     email &&
                     <Stack mb={4} direction="row" gap={1} alignItems="center" justifyContent="center">
                         <MailIcon color="primary" />
                         <Typography variant="body1" fontWeight="bold">{email}</Typography>
                     </Stack>
-                }
+                } */}
 
                 <Typography mb={1} size={"large"} variant="body1">{text}</Typography>
                 <Link to='/login'><Button variant="contained">Log In</Button></Link>
