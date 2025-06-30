@@ -47,7 +47,7 @@ def environmental_data(request):
         weather_resp.raise_for_status()
 
         zoom = 18
-        size = "1024x1024"
+        size = "512x512"
         maptype = "satellite"
         map_url = (
             f"https://maps.googleapis.com/maps/api/staticmap"
