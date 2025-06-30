@@ -77,7 +77,7 @@ def train_step(model, epochs, optimizer, classification_loss, segmentation_loss,
                 loss_seg = segmentation_loss(output, output_mask)
                 loss_iou = iou_loss(output, output_mask)
 
-                loss = loss_seg + loss_iou
+                loss = loss_seg + 10 * loss_iou
 
             optimizer.zero_grad()
             loss.backward()
