@@ -1,37 +1,39 @@
 import torch
 import torch
 import torch.nn as nn
-from torchvision.models import resnet18
+from torchvision.models import resnet18, ResNet18_Weights
 from .components import TransposeConvBlock
 
 
 class ResUNet(nn.Module):
     def __init__(self, in_channels = 3, out_channels = 7, initial_feature = 32, steps = 4):
         super().__init__()
-        resnet = resnet18(pretrained=True)
+
+        resnet = resnet18(weights=ResNet18_Weights.DEFAULT)
 
         self.encoder = nn.ModuleList([
-            nn.Sequential(resnet.conv1, resnet.bn1, resnet.relu),  
-            nn.Sequential(resnet.maxpool, resnet.layer1),          
-            resnet.layer2,                                        
-            resnet.layer3,                                         
-            resnet.layer4                                          
+            nn.Sequential(resnet.conv1, resnet.bn1, resnet.relu),       
+            nn.Sequential(resnet.maxpool, resnet.layer1),               
+            resnet.layer2,                                              
+            resnet.layer3,                                              
+            resnet.layer4                                               
         ])
 
+
         self.fc = nn.Sequential(
-            resnet.avgpool,    
+            nn.AdaptiveAvgPool2d((1, 1)),
             nn.Flatten(),
-            nn.Linear(512, 1)
+            nn.Linear(512, 1)  
         )
 
         self.decoder = nn.ModuleList([
-            TransposeConvBlock(512, 256),  
-            TransposeConvBlock(256, 128),  
-            TransposeConvBlock(128, 64),   
-            TransposeConvBlock(64, 64),   
+            TransposeConvBlock(512, 256),
+            TransposeConvBlock(256, 128),
+            TransposeConvBlock(128, 64),
+            TransposeConvBlock(64, 64),
         ])
 
-        self.final_upsample = nn.ConvTranspose2d(64, 32, kernel_size=2, stride=2) 
+        self.final_upsample = nn.ConvTranspose2d(64, 32, kernel_size=2, stride=2)
         self.out_conv = nn.Conv2d(32, out_channels, kernel_size=1)
 
     def forward(self, x):
@@ -41,41 +43,18 @@ class ResUNet(nn.Module):
             x = layer(x)
             skip_connections.append(x)
 
-        bottleneck = skip_connections.pop() 
-
-        label = self.fc(bottleneck)
-        x = bottleneck
-        skip_connections = skip_connections[::-1]
-
-        for i, decoder_block in enumerate(self.decoder):
-            skip = skip_connections[i]
-            x = decoder_block(x, skip)
-
-        x = self.final_upsample(x)  
-        output = self.out_conv(x)
-
-        return label, output
-
-
-    def forward(self, x):
-        skip_connections = []
-
-        for layer in self.encoder:
-            x = layer(x)
-            skip_connections.append(x)
-
-        bottleneck = skip_connections.pop()
+        bottleneck = skip_connections.pop()  # [B, 512, H/32, W/32]
 
         label = self.fc(bottleneck) 
         x = bottleneck
         skip_connections = skip_connections[::-1]
 
         for i, decoder_block in enumerate(self.decoder):
-            skip = skip_connections[i]
-            x = decoder_block(x, skip)
+            x = decoder_block(x, skip_connections[i])
 
         x = self.final_upsample(x)
         output = self.out_conv(x)
+
         return label, output
 
 

@@ -4,6 +4,7 @@ from torch.utils.data import DataLoader
 from dataset.dataset import LoveDa
 from unet.model import UNet
 from unet.resunet import ResUNet
+from unet.loss import IoULoss
 
 from utils import load_config, train_step, save_model
 import os
@@ -48,7 +49,8 @@ print(f"[INFO] UNet model initialized with input channels={config['model']['in_c
 optimizer = torch.optim.Adam(model.parameters(), float(config["training"]["learning_rate"]))
 classification_loss = nn.BCEWithLogitsLoss()
 segmentation_loss = nn.CrossEntropyLoss()
+iou_loss = IoULoss()
 scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.5)
 
 
-train_step(model, config["training"]["epochs"], optimizer, classification_loss, segmentation_loss, scheduler , train_dataloder, val_dataloader, device)
+train_step(model, config["training"]["epochs"], optimizer, classification_loss, segmentation_loss, iou_loss, scheduler , train_dataloder, val_dataloader, device)

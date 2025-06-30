@@ -10,7 +10,7 @@ def load_config(config_path="config.yaml"):
         config = yaml.safe_load(f)
     return config
 
-def valid_step(model, classification_loss, segmentation_loss, val_dataloader, device):
+def valid_step(model, classification_loss, segmentation_loss, iou_loss, val_dataloader, device):
     model.eval()
     total_loss_cls = 0.0
     total_loss_seg = 0.0
@@ -51,7 +51,7 @@ def valid_step(model, classification_loss, segmentation_loss, val_dataloader, de
     print(f"Segmentation Validation Loss: {avg_loss_seg:.4f} | Segmentation Pixel Validation Accuracy: {accuracy_seg:.4f}")
 
 
-def train_step(model, epochs, optimizer, classification_loss, segmentation_loss, scheduler , train_dataloder, val_dataloader, device):
+def train_step(model, epochs, optimizer, classification_loss, segmentation_loss, iou_loss, scheduler , train_dataloder, val_dataloader, device):
     model.train()
     torch.autograd.set_detect_anomaly(True)
     logging.info("Initializing model training...\n")
@@ -75,12 +75,12 @@ def train_step(model, epochs, optimizer, classification_loss, segmentation_loss,
                 
                 loss_cls = classification_loss(pred.squeeze(1), label)
                 loss_seg = segmentation_loss(output, output_mask)
+                loss_iou = iou_loss(output, output_mask)
 
-                loss = 25*loss_seg + 5*loss_cls
+                loss = loss_seg + loss_iou
 
             optimizer.zero_grad()
             loss.backward()
-            torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
             optimizer.step()
 
             total_loss_cls += loss_cls.item() * input_image.size(0)
@@ -103,7 +103,7 @@ def train_step(model, epochs, optimizer, classification_loss, segmentation_loss,
         print(f"\nEpoch {epoch + 1}/{epochs} completed in {elapsed:.2f} seconds")
         print(f"Classification Train Loss: {avg_loss_cls:.4f} | Classification Train Accuracy: {accuracy_cls:.4f}")
         print(f"Segmentation Train Loss: {avg_loss_seg:.4f} | Segmentation Pixel Train Accuracy: {accuracy_seg:.4f}")
-        valid_step(model, classification_loss, segmentation_loss, val_dataloader, device)
+        valid_step(model, classification_loss, segmentation_loss, iou_loss, val_dataloader, device)
         save_model(model, "resunet-loveda")
 
 
