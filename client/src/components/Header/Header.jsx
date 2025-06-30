@@ -142,7 +142,7 @@ const Header = () => {
                                     <DropdownCard>
                                         <List gap={1}>
                                             <Link to='/dashboard'><Typography mb={1} variant="body1">Dashboard</Typography></Link>
-                                            <Link to=''><Typography mb={1} variant="body1">Change password</Typography></Link>
+                                            <Link to='/change-password'><Typography mb={1} variant="body1">Change password</Typography></Link>
                                             <Typography sx={{ cursor: "pointer" }} onClick={() => setDeleteUser(true)} mb={1} variant="body1" color="warning">Delete account</Typography>
                                             <Typography sx={{ cursor: "pointer" }} onClick={handleLogOut} variant="body1" color="error">Log out</Typography>
                                         </List>
