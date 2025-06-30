@@ -14,18 +14,22 @@ def environmental_data(request):
     if not api_key_google_maps:
         return Response({'error': 'Google Maps API key not configured'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+    fast_api_url = settings.FAST_API_MICROSERVICE_URL
+    if not fast_api_url:
+        return Response({'error': 'FastAPI microservice URL not configured'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
     lat = request.GET.get('lat')
     lon = request.GET.get('lon')
 
     if not lat or not lon:
         return Response({'error': 'Missing lat or lon query parameters'}, status=status.HTTP_400_BAD_REQUEST)
 
-    session = requests.Session()
     timeout = 5
-
     location_params = {'lat': lat, 'lon': lon, 'appid': api_key}
 
     try:
+        session = requests.Session()
+
         air_pollution_resp = session.get(
             'http://api.openweathermap.org/data/2.5/air_pollution',
             params=location_params,
@@ -52,7 +56,16 @@ def environmental_data(request):
             f"&key={api_key_google_maps}"
         )
 
-        map_image_url = map_url
+        post_payload = {
+            "url": map_url  
+        }
+
+        fastapi_response = requests.post(
+            fast_api_url,
+            json=post_payload,
+            # timeout=timeout
+        )
+        fastapi_response.raise_for_status()
 
         return Response({
             'location': {
@@ -61,7 +74,8 @@ def environmental_data(request):
             },
             'air_pollution': air_pollution_resp.json(),
             'weather': weather_resp.json(),
-            'map_image_url': map_image_url, 
+            'map_image_url': map_url,
+            'fastapi_result': fastapi_response.json()
         })
 
     except requests.exceptions.RequestException as e:
