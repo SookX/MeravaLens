@@ -61,6 +61,11 @@ theme.components.MuiToolbar = {
         root: {
             paddingLeft: theme.spacing(8),
             paddingRight: theme.spacing(8),
+
+            [theme.breakpoints.down("md")]: {
+                paddingLeft: theme.spacing(4),
+                paddingRight: theme.spacing(4)
+            }
         }
     }
 }
