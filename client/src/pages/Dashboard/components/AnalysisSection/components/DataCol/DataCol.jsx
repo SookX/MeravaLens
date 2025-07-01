@@ -11,10 +11,10 @@ const DataCol = () => {
             <Grid size={12}>
                 <Location />
             </Grid>
-            <Grid size={5}>
+            <Grid size={{ xs: 12, sm: 5, md: 12, lg: 5}}>
                 <Weather />
             </Grid>
-            <Grid size={"grow"}>
+            <Grid size={{ xs: 12, sm: "grow", md: 12, lg: "grow" }}>
                 <Atmosphere />
             </Grid>
             <Grid size={12}>

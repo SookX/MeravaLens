@@ -7,7 +7,9 @@ import SummaryCard from "./components/SummaryCard/SummaryCard"
 
 const AnalysisSection = () => {
     const StyledBox = styled(Box)(({ theme })=>({
-        padding: `${theme.spacing(8)} ${theme.spacing(16)}`
+        padding: `${theme.spacing(8)} ${theme.spacing(16)}`,
+        [theme.breakpoints.down("lg")]: { padding: `${theme.spacing(8)} ${theme.spacing(8)}` },
+        [theme.breakpoints.down("sm")]: { padding: `${theme.spacing(8)} ${theme.spacing(2)}` }
     }))
 
 
@@ -26,10 +28,10 @@ const AnalysisSection = () => {
                 <StyledDivider><Typography textAlign={"center"} color="primary" variant="h2">Analysis</Typography></StyledDivider>
             </Box>
             <Grid container spacing={3}>
-                <Grid size={8}>
+                <Grid size={{ xs: 12, md: 8 }}>
                     <ImageCard />
                 </Grid>
-                <Grid size={"grow"}>
+                <Grid size={{ xs: 12, md: "grow" }}>
                     <DataCol />
                 </Grid>
                 <Grid size={12}>
