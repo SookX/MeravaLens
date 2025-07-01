@@ -50,6 +50,9 @@ export const theme = createTheme({
             styleOverrides: {
                 root: {
                     boxShadow: "none"
+                },
+                colorDefault: {
+                    backgroundColor: palette.background.default
                 }
             }
         }

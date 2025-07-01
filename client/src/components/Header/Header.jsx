@@ -80,6 +80,25 @@ const Header = () => {
 
 
 
+    // Holds the state for the navbar color
+    const [color, setColor] = useState("transparent")
+
+
+
+    // Tracks scrolling
+    useEffect(() => {
+        const handleChangeColor = () => {
+            if(window.scrollY == 0) setColor("transparent")
+            else if(color !== "default") setColor("default")
+        }
+
+        window.addEventListener("scroll", () => handleChangeColor())
+
+        return () => window.removeEventListener("scroll", () => handleChangeColor())
+    }, [])
+
+
+
     const UserBox = styled(Stack)(({ theme })=>({
         flexDirection: "row",
         gap: theme.spacing(1),
@@ -112,7 +131,7 @@ const Header = () => {
 
 
     return (
-        <AppBar color="transparent">
+        <AppBar color={color}>
             <Dialog open={deleteUser} onClose={() => setDeleteUser(false)}>
                 <StyledDialogContent>
                     <Typography color="primary" variant="h3">Are you sure?</Typography>
