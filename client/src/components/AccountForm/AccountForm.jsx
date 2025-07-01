@@ -16,7 +16,11 @@ const AccountForm = ({
 }) => {
     const FormCard = styled(Card)(({ theme })=>({
         padding: theme.spacing(6),
-        width: theme.spacing(80),
+        [theme.breakpoints.down("lg")]: { padding: theme.spacing(5) },
+        [theme.breakpoints.down("md")]: { padding: theme.spacing(6) },
+        [theme.breakpoints.down("sm")]: { padding: theme.spacing(3) },
+
+        width: "100%",
         textAlign: "center",
 
         backgroundColor: "transparent"
@@ -25,7 +29,10 @@ const AccountForm = ({
     const FormSection = styled(Stack)(({ theme })=>({
         alignItems: "center",
         justifyContent: "center",
-        padding: `${theme.spacing(16)} 0`,
+        padding: `${theme.spacing(16)} ${theme.spacing(18)}`,
+        [theme.breakpoints.down("lg")]: { padding: `${theme.spacing(16)} ${theme.spacing(12)}`, },
+        [theme.breakpoints.down("md")]: { padding: `${theme.spacing(12)} ${theme.spacing(8)}`, },
+        [theme.breakpoints.down("sm")]: { padding: `${theme.spacing(16)} ${theme.spacing(4)}`, }
     }))
 
     const ForgotPassword = styled(Typography)(({ theme })=>({
@@ -41,13 +48,13 @@ const AccountForm = ({
     return (
         <FormSection>
             <FormCard>
-                <Stack mb={4}>
+                <Stack mb={{ xs: 3, md: 4 }}>
                     <Typography variant="h3" color="primary">{title}</Typography>
                     <Typography variant="body1">{text}</Typography>
                     { error && <Typography variant="body1" color="error">{error}</Typography> }
                 </Stack>
 
-                <Stack gap={2}>
+                <Stack gap={{ xs: 1, md: 2 }}>
                     {
                         inputs.map((input, i) => (
                             <TextField
@@ -61,7 +68,7 @@ const AccountForm = ({
                     }
                 </Stack>
 
-                <Stack mt={2} direction="row" alignItems="center" justifyContent="space-between">
+                <Stack mt={{ xs: 1, md: 2 }} direction="row" alignItems="center" justifyContent="space-between">
                     {
                         rememberMeRef !== null &&
                         <FormControlLabel 

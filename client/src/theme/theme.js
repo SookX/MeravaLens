@@ -76,6 +76,12 @@ theme.typography.h1 = {
     [theme.breakpoints.down("md")]: { fontSize: theme.spacing(8) }
 }
 
+theme.typography.h3 = {
+    ...theme.typography.h3,
+    [theme.breakpoints.down("lg")]: { fontSize: theme.spacing(5) },
+    [theme.breakpoints.down("sm")]: { fontSize: theme.spacing(4) }
+}
+
 theme.typography.h4 = {
     ...theme.typography.h4,
     [theme.breakpoints.down("lg")]: { fontSize: theme.spacing(3) }

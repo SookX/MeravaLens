@@ -19,7 +19,7 @@ const FormPage = ({ children }) => {
 
     return (
         <Section container>
-            <Grid size={5}>
+            <Grid size={{ md: 4, lg: 5 }}>
                 <Image />
             </Grid>
             <Grid size="grow">
