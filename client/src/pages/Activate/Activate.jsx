@@ -51,6 +51,9 @@ const Activate = () => {
 
     const Section = styled(Stack)(({theme})=>({
         padding: `${theme.spacing(20)} ${theme.spacing(25)}`,
+        [theme.breakpoints.down("md")]: { padding: `${theme.spacing(16)} ${theme.spacing(12)}` },
+        [theme.breakpoints.down("sm")]: { padding: `${theme.spacing(12)} ${theme.spacing(4)}` },
+
         textAlign: "center",
         alignItems: "center",
         justifyContent: "center",
@@ -62,6 +65,17 @@ const Activate = () => {
     const IconSuccess = styled(CheckCircleOutline)(({ theme })=>({
         width: theme.spacing(20),
         height: theme.spacing(20),
+        
+        [theme.breakpoints.down("lg")]: {
+            width: theme.spacing(16),
+            height: theme.spacing(16)
+        },
+
+        [theme.breakpoints.down("sm")]: {
+            width: theme.spacing(12),
+            height: theme.spacing(12)
+        },
+
         marginBottom: theme.spacing(2)
     }))
 
@@ -69,6 +83,17 @@ const Activate = () => {
     const IconError = styled(HighlightOff)(({ theme })=>({
         width: theme.spacing(20),
         height: theme.spacing(20),
+
+        [theme.breakpoints.down("lg")]: {
+            width: theme.spacing(16),
+            height: theme.spacing(16)
+        },
+
+        [theme.breakpoints.down("sm")]: {
+            width: theme.spacing(12),
+            height: theme.spacing(12)
+        },
+
         marginBottom: theme.spacing(2)
     }))
 
