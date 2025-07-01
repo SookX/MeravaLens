@@ -9,6 +9,16 @@ const Home = () => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
+        [theme.breakpoints.down("md")]: {
+            alignItems: "center",
+            textAlign: "center",
+            padding: `${theme.spacing(16)} ${theme.spacing(8)}`,
+            paddingBottom: 0
+        },
+        [theme.breakpoints.down("sm")]: {
+            padding: `${theme.spacing(16)} ${theme.spacing(4)}`,
+            paddingBottom: 0
+        },
         height: "100%",
         position: "relative",
         overflow: "hidden",
@@ -31,10 +41,10 @@ const Home = () => {
     }))
 
     const RightDivider = styled(StyledDivider)(({ theme })=>({
-        [theme.breakpoints.up("sm")]: {
+        [theme.breakpoints.up("md")]: {
             display: "none"
         },
-        right: theme.spacing(9)
+        right: theme.spacing(-9)
     }))
 
     const Circle = styled(Box)(({ theme })=>({
@@ -45,12 +55,14 @@ const Home = () => {
         position: "absolute",
         left: "-30%",
         top: "50%",
-        zIndex: 0
+        zIndex: 0,
+
+        [theme.breakpoints.down("md")]: { display: "none" }
     }))
 
     return (
         <Grid container direction="row">
-            <Grid size={{ xs: 8, lg: 7 }}>
+            <Grid size={{ xs: 12, md: 9, lg: 7 }}>
                 <TextBox>
                     <Circle />
                     <Welcome>
@@ -64,10 +76,10 @@ const Home = () => {
                     <Typography variant="body1" sx={{ zIndex: "1" }} mb={1}>Your Gateway to Real-Time Environmental Intelligence</Typography>
                     <Typography variant="body1" sx={{ zIndex: "1" }} mb={6}>MeravaLens is a next-generation satellite platform that brings together the power of multiple APIs and advanced  AI models to provide comprehensive, real-time environmental data – all in one place.</Typography>
 
-                    <Link to="/register" style={{ alignSelf: "start" }}><Button variant="outlined">Get started</Button></Link>
+                    <Button variant="outlined" sx={{ alignSelf: { xs: "center", md: "start" } }}><Link to="/register" style={{ color: "inherit" }}>Get started</Link></Button>
                 </TextBox>
             </Grid>
-            <Grid size="grow"><EarthCanva /></Grid>
+            <Grid size={{ xs: 12, md: "grow" }}><EarthCanva /></Grid>
         </Grid>
     )
 }

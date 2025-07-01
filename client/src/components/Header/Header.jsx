@@ -32,7 +32,7 @@ const Header = () => {
             setLoading(false)
         }
 
-        fetching()
+        if(access) fetching()
     }, [access])
 
 

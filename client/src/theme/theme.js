@@ -64,3 +64,14 @@ theme.components.MuiToolbar = {
         }
     }
 }
+
+theme.typography.h1 = {
+    ...theme.typography.h1,
+    [theme.breakpoints.down("lg")]: { fontSize: theme.spacing(9) },
+    [theme.breakpoints.down("md")]: { fontSize: theme.spacing(8) }
+}
+
+theme.typography.h4 = {
+    ...theme.typography.h4,
+    [theme.breakpoints.down("lg")]: { fontSize: theme.spacing(3) }
+}

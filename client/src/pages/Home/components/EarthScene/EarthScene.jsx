@@ -10,24 +10,42 @@ const EarthScene = () => {
 
     const earthRef = useRef()
     
-    useFrame((state, delta) => {
-        // earthRef.current.rotation.x -= delta / 8
-        earthRef.current.rotation.y += delta / 15
-    })
-
     const [earthPosition, setEarthPosition] = useState([2, -1, -5])
 
-    useEffect(() => {
-        const handleResize = () => {
-            if(window.innerWidth > theme.breakpoints.values.lg) setEarthPosition([2, -1, -5])
-            else if(window.innerWidth > theme.breakpoints.values.md) setEarthPosition([3, -1, -5])
+
+    const handleEarthReposition = (pos) => {
+        if(earthPosition != pos) { setEarthPosition([...pos]) }
+    }
+
+
+    useFrame((state, delta) => {
+        if(window.innerWidth > theme.breakpoints.values.md) earthRef.current.rotation.y += delta / 15
+        else earthRef.current.rotation.x -= delta / 15
+
+        if(window.innerWidth > theme.breakpoints.values.lg) {
+            handleEarthReposition([2, -1, -5])
         }
+        else if(window.innerWidth > theme.breakpoints.values.md) {
+            handleEarthReposition([4, -1, -5])
+        }
+        else if(window.innerWidth > theme.breakpoints.values.xs) {
+            handleEarthReposition([0, -3, -5])
+        }
+    })
 
-        handleResize()
-        window.addEventListener('resize', handleResize())
+    // useEffect(() => {
+    //     const handleResize = () => {
+    //         console.log('resiziing')
+    //         if(window.innerWidth > theme.breakpoints.values.lg) setEarthPosition([2, -1, -5])
+    //         // else if(window.innerWidth > theme.breakpoints.values.md) setEarthPosition([3, -1, -5])
+    //         else if(window.innerWidth > theme.breakpoints.values.md) setEarthPosition([0, 0, 0])
+    //     }
 
-        return window.removeEventListener('resize', handleResize())
-    }, [])
+    //     handleResize()
+    //     window.addEventListener('resize', handleResize())
+
+    //     return window.removeEventListener('resize', handleResize())
+    // }, [])
 
     return (
         <>
