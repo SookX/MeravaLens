@@ -1,12 +1,18 @@
 import { Canvas, useFrame } from '@react-three/fiber'
-import { useEffect, useRef, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { useGLTF } from "@react-three/drei"
 import { theme } from '../../../../theme/theme'
+import { DataContext } from '../../../../context/DataContext'
 
 useGLTF.preload("/models/earth/earth.glb")
 
 const EarthScene = () => {
+    const { setLoading } = useContext(DataContext)
     const model = useGLTF("/models/earth/earth.glb")
+    
+    useEffect(() => {
+        setLoading(false)
+    }, [model])
 
     const earthRef = useRef()
     

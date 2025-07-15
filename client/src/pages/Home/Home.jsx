@@ -2,8 +2,18 @@ import { Box, Typography, Grid, styled, Button, Divider } from '@mui/material'
 import EarthCanva from './components/EarthScene/EarthScene'
 import { theme } from '../../theme/theme'
 import { Link } from 'react-router-dom'
+import { useContext, useEffect } from 'react'
+import { DataContext } from '../../context/DataContext'
 
 const Home = () => {
+    const { setLoading } = useContext(DataContext)
+
+    useEffect(() => {
+        setLoading(true)
+    }, [])
+
+
+
     const TextBox = styled(Box)(({ theme })=>({
         padding: `${theme.spacing(16)} ${theme.spacing(16)}`,
         display: "flex",
@@ -59,6 +69,9 @@ const Home = () => {
 
         [theme.breakpoints.down("md")]: { display: "none" }
     }))
+
+
+    
 
     return (
         <Grid container direction="row">
