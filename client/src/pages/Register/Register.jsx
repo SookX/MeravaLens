@@ -6,16 +6,17 @@ import FormPage from "../../components/FormPage/FormPage"
 import AuthenticationMessage from "../../components/AuthenticationMessage/AuthenticationMessage"
 import GoogleButton from "../../components/GoogleButton/GoogleButton"
 import { crud } from "../../api/crud"
+import { useNavigate } from "react-router-dom"
 
 const Register = () => {
     // Gets global data from the context
-    const { access, navigate, setLoading } = useContext(DataContext)
+    const { access, setLoading } = useContext(DataContext)
 
 
 
     // Checks if the user is already authenticated
     useEffect(() => {
-        if(access) navigate('/dashboard')
+        if(access) useNavigate()('/dashboard')
     }, [access])
 
 

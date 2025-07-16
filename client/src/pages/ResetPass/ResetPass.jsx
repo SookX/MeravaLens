@@ -1,6 +1,6 @@
 import { Box, Button, Divider, Stack, styled, TextField, Typography } from "@mui/material"
 import { useContext, useEffect, useRef, useState } from "react"
-import { Link, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { DataContext } from "../../context/DataContext"
 import { theme } from "../../theme/theme"
 import { CheckCircleOutline, HighlightOff, Password } from "@mui/icons-material"
@@ -15,7 +15,7 @@ const ResetPass = () => {
 
 
     // Gets global data from the context
-    const { navigate, setLoading } = useContext(DataContext)
+    const { setLoading } = useContext(DataContext)
 
 
 
@@ -48,7 +48,7 @@ const ResetPass = () => {
         console.log(response)
 
         
-        if(response.status == 200) navigate('/login')
+        if(response.status == 200) useNavigate()('/login')
         else setError(response.response.data.error)
     
         setLoading(false)

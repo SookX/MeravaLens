@@ -3,10 +3,11 @@ import { GoogleLogin } from "@react-oauth/google";
 import { useContext } from "react";
 import { DataContext } from "../../context/DataContext";
 import { crud } from "../../api/crud";
+import { useNavigate } from "react-router-dom";
 
 const GoogleButton = ({ setError, text = "signin_with" }) => {
     // Gets global data from the context
-    const { setAccess, setRefresh, navigate, setLoading } = useContext(DataContext)
+    const { setAccess, setRefresh, setLoading } = useContext(DataContext)
 
 
 
@@ -31,7 +32,7 @@ const GoogleButton = ({ setError, text = "signin_with" }) => {
             setAccess(response.data.access);
             localStorage.setItem('refresh', response.data.refresh);
             setRefresh(response.data.refresh);
-            navigate('/dashboard');
+            useNavigate()('/dashboard');
         } else {
             setError('Google register failed.');
         }

@@ -1,6 +1,6 @@
 import { Box, Button, Divider, Stack, styled, Typography } from "@mui/material"
 import { useContext, useEffect, useState } from "react"
-import { Link, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { DataContext } from "../../context/DataContext"
 import { theme } from "../../theme/theme"
 import { CheckCircleOutline, HighlightOff } from "@mui/icons-material"
@@ -13,13 +13,13 @@ const Activate = () => {
 
 
     // Gets global data from the context
-    const { access, navigate, setLoading } = useContext(DataContext)
+    const { access, setLoading } = useContext(DataContext)
 
 
 
     // Checks if the user is already authenticated
     useEffect(() => {
-        if(access) navigate('/dashboard')
+        if(access) useNavigate()('/dashboard')
     }, [access])
 
 

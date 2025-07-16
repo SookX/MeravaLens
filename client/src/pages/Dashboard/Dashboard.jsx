@@ -3,18 +3,19 @@ import { DataContext } from "../../context/DataContext"
 import MapSection from "./components/MapSection/MapSection"
 import AnalysisSection from "./components/AnalysisSection/AnalysisSection"
 import { crud } from "../../api/crud"
+import { useNavigate } from "react-router-dom"
 
 export const DashboardContext = createContext({  })
 
 const Dashboard = () => {
     // Gets global data from the context
-    const { access, navigate, setLoading } = useContext(DataContext)
+    const { access, setLoading } = useContext(DataContext)
 
 
 
     // Checks if the user is authenticated
     useEffect(() => {
-        if(!access) navigate('/login')
+        if(!access) useNavigate()('/login')
     }, [access])
 
 

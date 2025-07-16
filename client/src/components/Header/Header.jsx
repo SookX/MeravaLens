@@ -1,6 +1,6 @@
 import { AppBar, Box, Button, Card, Dialog, DialogContent, List, Stack, styled, Toolbar, Typography } from "@mui/material"
 import logo from "../../img/logo.webp"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useContext, useEffect, useState } from "react"
 import { DataContext } from "../../context/DataContext"
 import { ArrowDropDown } from "@mui/icons-material"
@@ -9,7 +9,7 @@ import { crud } from "../../api/crud"
 
 const Header = () => {
     // Gets global data from the context
-    const { access, setAccess, setRefresh, navigate, setLoading } = useContext(DataContext)
+    const { access, setAccess, setRefresh, setLoading } = useContext(DataContext)
 
 
 
@@ -52,7 +52,7 @@ const Header = () => {
         sessionStorage.removeItem('refresh')
         setAccess(null)
         setRefresh(null)
-        navigate('/')
+        useNavigate()('/')
     }
 
 

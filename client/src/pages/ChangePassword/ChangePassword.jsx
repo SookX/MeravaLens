@@ -3,10 +3,11 @@ import AccountForm from "../../components/AccountForm/AccountForm"
 import FormPage from "../../components/FormPage/FormPage"
 import { DataContext } from "../../context/DataContext"
 import { crud } from "../../api/crud"
+import { useNavigate } from "react-router-dom"
 
 const ChangePassword = () => {
     // Gets global data from the context
-    const { setLoading, navigate } = useContext(DataContext)
+    const { setLoading } = useContext(DataContext)
 
 
 
@@ -43,7 +44,7 @@ const ChangePassword = () => {
             }
         })
 
-        if(response.status == 200) navigate('/dashboard')
+        if(response.status == 200) useNavigate()('/dashboard')
         else setError(response.response.data.message)
 
         setLoading(false)
