@@ -12,6 +12,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google"
 import Dashboard from "./pages/Dashboard/Dashboard"
 import Header from "./components/Header/Header"
 import ChangePassword from "./pages/ChangePassword/ChangePassword"
+import Footer from "./components/Footer/Footer"
 
 function App() {
   const clientId = import.meta.env.VITE_GOOGLE_OAUTH2
@@ -33,6 +34,7 @@ function App() {
                 <Route path="/change-password" element={<ChangePassword />} />
                 <Route path="/dashboard" element={<Dashboard />} />
               </Routes>
+              <Footer />
             </GoogleOAuthProvider>
           </DataProvider>
         </BrowserRouter>

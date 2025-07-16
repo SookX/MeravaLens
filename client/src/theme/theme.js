@@ -4,6 +4,7 @@ const palette = {
     mode: "dark",
     background: {
         default: "#000",
+        mid: "#121212",
         light: "#333333"
     },
     text: {
@@ -53,6 +54,13 @@ export const theme = createTheme({
                 },
                 colorDefault: {
                     backgroundColor: palette.background.default
+                }
+            }
+        },
+        MuiLink: {
+            styleOverrides: {
+                root: {
+                    textDecoration: "none"
                 }
             }
         }
