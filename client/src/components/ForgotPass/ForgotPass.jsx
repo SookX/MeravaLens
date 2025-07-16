@@ -37,8 +37,6 @@ const ForgotPass = () => {
                 email: emailRef.current.value
             }
         })
-        
-        console.log(response)
 
         if(response.status == 200) setModal(true)
         else setError(response.response.data.error)

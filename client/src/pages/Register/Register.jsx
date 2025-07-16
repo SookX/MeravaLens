@@ -70,8 +70,6 @@ const Register = () => {
         if(response.status == 201) setModal(true)
         else setError(response.response.data.error)
 
-        console.log(response)
-
         setLoading(false)
     }
 

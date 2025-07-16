@@ -27,7 +27,6 @@ const Map = ({ mapHeight = 100 }) => {
     }
 
     const handleSelectCoords = (e) => {
-        console.log(coords)
         setCoords({ lat: e.latLng.lat(), lng: e.latLng.lng() })
     }
 

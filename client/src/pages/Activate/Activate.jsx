@@ -40,7 +40,6 @@ const Activate = () => {
             })
 
             if(response.status !== 200) setError(response.response.data.error)
-            console.log(response)
 
             setLoading(false)
         }

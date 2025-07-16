@@ -43,8 +43,6 @@ const ResetPass = () => {
             }
         })
 
-        console.log(response)
-
         
         if(response.status == 200) useNavigate()('/login')
         else setError(response.response.data.error)

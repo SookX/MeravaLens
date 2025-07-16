@@ -25,8 +25,6 @@ const GoogleButton = ({ setError, text = "signin_with" }) => {
             },
         });
 
-        console.log(response)
-
         if (response.status === 200) {
             localStorage.setItem('access', response.data.access);
             setAccess(response.data.access);

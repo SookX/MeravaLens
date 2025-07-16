@@ -39,20 +39,6 @@ const EarthScene = () => {
         }
     })
 
-    // useEffect(() => {
-    //     const handleResize = () => {
-    //         console.log('resiziing')
-    //         if(window.innerWidth > theme.breakpoints.values.lg) setEarthPosition([2, -1, -5])
-    //         // else if(window.innerWidth > theme.breakpoints.values.md) setEarthPosition([3, -1, -5])
-    //         else if(window.innerWidth > theme.breakpoints.values.md) setEarthPosition([0, 0, 0])
-    //     }
-
-    //     handleResize()
-    //     window.addEventListener('resize', handleResize())
-
-    //     return window.removeEventListener('resize', handleResize())
-    // }, [])
-
     return (
         <>
             <primitive

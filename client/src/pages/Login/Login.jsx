@@ -67,8 +67,6 @@ const Login = () => {
         }
         else setError(response.response.data.error)
 
-        console.log(response)
-
         setLoading(false)
     }
 

@@ -89,7 +89,6 @@ const Dashboard = () => {
                 method: "get"
             })
 
-            console.log(response)
             if(response.status == 200) {
                 setImage(response.data.map_image_url)
                 setSegmentedImage(`data:image/jpeg;base64,${response.data.fastapi_result.segmentation_mask_base64}`)
