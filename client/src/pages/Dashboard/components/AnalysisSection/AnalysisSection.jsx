@@ -23,7 +23,7 @@ const AnalysisSection = () => {
 
 
     return (
-        <StyledBox id="analysis">
+        <StyledBox>
             <Box mb={6}>
                 <StyledDivider><Typography textAlign={"center"} color="primary" variant="h2">Analysis</Typography></StyledDivider>
             </Box>

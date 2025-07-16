@@ -1,9 +1,10 @@
-import { createContext, useContext, useEffect, useState } from "react"
+import { createContext, useContext, useEffect, useRef, useState } from "react"
 import { DataContext } from "../../context/DataContext"
 import MapSection from "./components/MapSection/MapSection"
 import AnalysisSection from "./components/AnalysisSection/AnalysisSection"
 import { crud } from "../../api/crud"
 import { useNavigate } from "react-router-dom"
+import { Box } from "@mui/material"
 
 export const DashboardContext = createContext({  })
 
@@ -22,6 +23,11 @@ const Dashboard = () => {
     useEffect(() => {
         if(!access) navigate('/login')
     }, [access])
+
+
+
+    // Holds the analysis section ref
+    const analysisRef = useRef()
 
 
 
@@ -47,6 +53,13 @@ const Dashboard = () => {
             setLoading(false)
         }
     }, [image, segmentedImage, weather, airPollution, summary])
+
+
+
+    // Scrolls to the analysis
+    useEffect(() => {
+        if(analysis) analysisRef.current.scrollIntoView()
+    }, [analysis])
 
 
 
@@ -88,6 +101,7 @@ const Dashboard = () => {
     useEffect(() => {
         const fetching = async () => {
             setLoading(true)
+            setAnalysis(false)
 
             const response = await crud({
                 url: `/environment/?lat=${coords.lat}&lon=${coords.lng}`,
@@ -121,10 +135,12 @@ const Dashboard = () => {
         >
             <MapSection />
 
-            {
-                analysis &&
-                <AnalysisSection />
-            }
+            <Box ref={analysisRef}>
+                {
+                    analysis &&
+                    <AnalysisSection />
+                }
+            </Box>
         </DashboardContext.Provider>
     )
 }
