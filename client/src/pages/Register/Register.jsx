@@ -13,9 +13,14 @@ const Register = () => {
 
 
 
+    // Navigates users to another page
+    const navigate = useNavigate()
+
+
+
     // Checks if the user is already authenticated
     useEffect(() => {
-        if(access) useNavigate()('/dashboard')
+        if(access) navigate('/dashboard')
     }, [access])
 
 

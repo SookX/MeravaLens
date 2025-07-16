@@ -11,6 +11,11 @@ const GoogleButton = ({ setError, text = "signin_with" }) => {
 
 
 
+    // Navigates users to another page
+    const navigate = useNavigate()
+
+
+
     // Google authentication logic
     const handleGoogleLoginSuccess = async (credentialResponse) => {
         setLoading(true)
@@ -30,7 +35,7 @@ const GoogleButton = ({ setError, text = "signin_with" }) => {
             setAccess(response.data.access);
             localStorage.setItem('refresh', response.data.refresh);
             setRefresh(response.data.refresh);
-            useNavigate()('/dashboard');
+            navigate('/dashboard');
         } else {
             setError('Google register failed.');
         }

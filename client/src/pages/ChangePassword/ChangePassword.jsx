@@ -11,6 +11,11 @@ const ChangePassword = () => {
 
 
 
+    // Navigates users to another page
+    const navigate = useNavigate()
+
+
+
     // Holds the values for the form
     const oldPasswordRef = useRef()
     const newPasswordRef = useRef()
@@ -44,7 +49,7 @@ const ChangePassword = () => {
             }
         })
 
-        if(response.status == 200) useNavigate()('/dashboard')
+        if(response.status == 200) navigate('/dashboard')
         else setError(response.response.data.message)
 
         setLoading(false)

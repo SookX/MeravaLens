@@ -17,6 +17,11 @@ const ResetPass = () => {
 
 
 
+    // Navigates users to another page
+    const navigate = useNavigate()
+
+
+
     // Holds the error state
     const [error, setError] = useState(null)
     const passwordRef = useRef()
@@ -44,7 +49,7 @@ const ResetPass = () => {
         })
 
         
-        if(response.status == 200) useNavigate()('/login')
+        if(response.status == 200) navigate('/login')
         else setError(response.response.data.error)
     
         setLoading(false)

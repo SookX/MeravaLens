@@ -13,9 +13,14 @@ const Dashboard = () => {
 
 
 
+    // Navigates users to another page
+    const navigate = useNavigate()
+
+
+
     // Checks if the user is authenticated
     useEffect(() => {
-        if(!access) useNavigate()('/login')
+        if(!access) navigate('/login')
     }, [access])
 
 

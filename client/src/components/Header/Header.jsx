@@ -13,6 +13,11 @@ const Header = () => {
 
 
 
+    // Navigates users to another page
+    const navigate = useNavigate()
+
+
+
     // Holds the state for the user
     const [user, setUser] = useState(null)
 
@@ -52,7 +57,7 @@ const Header = () => {
         sessionStorage.removeItem('refresh')
         setAccess(null)
         setRefresh(null)
-        useNavigate()('/')
+        navigate('/')
     }
 
 

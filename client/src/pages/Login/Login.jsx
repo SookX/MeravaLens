@@ -12,9 +12,14 @@ const Login = () => {
 
 
 
+    // Navigates users to another page
+    const navigate = useNavigate()
+
+
+
     // Checks if the user is already authenticated
     useEffect(() => {
-        if(access) useNavigate()('/dashboard')
+        if(access) navigate('/dashboard')
     }, [access])
 
 
@@ -63,7 +68,7 @@ const Login = () => {
             }
             setAccess(response.data.token.access)
             setRefresh(response.data.token.refresh)
-            useNavigate()('/dashboard')
+            navigate('/dashboard')
         }
         else setError(response.response.data.error)
 
