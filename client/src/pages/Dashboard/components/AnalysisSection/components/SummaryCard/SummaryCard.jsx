@@ -2,7 +2,7 @@ import { useContext } from "react"
 import { DashboardContext } from "../../../../Dashboard"
 import { Box, Card, IconButton, Stack, styled, Tooltip, Typography } from "@mui/material"
 import { theme } from "../../../../../../theme/theme"
-import { HelpOutline, QuestionMarkOutlined } from "@mui/icons-material"
+import { HelpOutline } from "@mui/icons-material"
 
 const SummaryCard = () => {
     // Gets dashboard data

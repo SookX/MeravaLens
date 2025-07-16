@@ -1,7 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react"
 import AccountForm from "../../components/AccountForm/AccountForm"
 import { DataContext } from "../../context/DataContext"
-import { Email, Person, LockOutline } from '@mui/icons-material'
 import FormPage from "../../components/FormPage/FormPage"
 import AuthenticationMessage from "../../components/AuthenticationMessage/AuthenticationMessage"
 import GoogleButton from "../../components/GoogleButton/GoogleButton"

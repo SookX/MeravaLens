@@ -2,8 +2,6 @@ import { useContext, useEffect, useRef, useState } from "react"
 import AccountForm from "../../components/AccountForm/AccountForm"
 import { DataContext } from "../../context/DataContext"
 import FormPage from "../../components/FormPage/FormPage"
-import { GoogleLogin } from '@react-oauth/google'
-import { Box, Stack } from "@mui/material"
 import GoogleButton from "../../components/GoogleButton/GoogleButton"
 import { crud } from "../../api/crud"
 import { useNavigate } from "react-router-dom"

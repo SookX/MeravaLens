@@ -1,4 +1,4 @@
-import { Box, Card, Grid, Stack, styled, Typography } from "@mui/material"
+import { Box, Grid, styled } from "@mui/material"
 import { theme } from "../../theme/theme"
 import satellite from "../../img/satellite.webp"
 

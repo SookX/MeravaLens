@@ -1,4 +1,4 @@
-import { Button, Card, Dialog, Stack, styled, Typography } from "@mui/material"
+import { Button, Card, Dialog, styled, Typography } from "@mui/material"
 import { theme } from "../../theme/theme"
 import { MailOutline } from "@mui/icons-material"
 import { Link } from "react-router-dom"
