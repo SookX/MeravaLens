@@ -5,10 +5,11 @@ import { useContext, useEffect, useState } from "react"
 import { DataContext } from "../../context/DataContext"
 import { ArrowDropDown } from "@mui/icons-material"
 import { theme } from "../../theme/theme"
+import { crud } from "../../api/crud"
 
 const Header = () => {
     // Gets global data from the context
-    const { access, setAccess, setRefresh, navigate, crud, setLoading } = useContext(DataContext)
+    const { access, setAccess, setRefresh, navigate, setLoading } = useContext(DataContext)
 
 
 

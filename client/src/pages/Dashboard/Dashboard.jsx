@@ -2,12 +2,13 @@ import { createContext, useContext, useEffect, useState } from "react"
 import { DataContext } from "../../context/DataContext"
 import MapSection from "./components/MapSection/MapSection"
 import AnalysisSection from "./components/AnalysisSection/AnalysisSection"
+import { crud } from "../../api/crud"
 
 export const DashboardContext = createContext({  })
 
 const Dashboard = () => {
     // Gets global data from the context
-    const { crud, access, navigate, setLoading } = useContext(DataContext)
+    const { access, navigate, setLoading } = useContext(DataContext)
 
 
 

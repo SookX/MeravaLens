@@ -5,10 +5,11 @@ import { Email, Person, LockOutline } from '@mui/icons-material'
 import FormPage from "../../components/FormPage/FormPage"
 import AuthenticationMessage from "../../components/AuthenticationMessage/AuthenticationMessage"
 import GoogleButton from "../../components/GoogleButton/GoogleButton"
+import { crud } from "../../api/crud"
 
 const Register = () => {
     // Gets global data from the context
-    const { crud, access, navigate, setLoading } = useContext(DataContext)
+    const { access, navigate, setLoading } = useContext(DataContext)
 
 
 

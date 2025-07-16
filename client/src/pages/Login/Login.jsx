@@ -5,10 +5,11 @@ import FormPage from "../../components/FormPage/FormPage"
 import { GoogleLogin } from '@react-oauth/google'
 import { Box, Stack } from "@mui/material"
 import GoogleButton from "../../components/GoogleButton/GoogleButton"
+import { crud } from "../../api/crud"
 
 const Login = () => {
     // Gets global data from the context
-    const { crud, access, setAccess, setRefresh, navigate, setLoading } = useContext(DataContext)
+    const { access, setAccess, setRefresh, navigate, setLoading } = useContext(DataContext)
 
 
 

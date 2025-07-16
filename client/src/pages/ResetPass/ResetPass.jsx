@@ -6,6 +6,7 @@ import { theme } from "../../theme/theme"
 import { CheckCircleOutline, HighlightOff, Password } from "@mui/icons-material"
 import FormPage from "../../components/FormPage/FormPage"
 import AccountForm from "../../components/AccountForm/AccountForm"
+import { crud } from "../../api/crud"
 
 const ResetPass = () => {
     // Gets the url params
@@ -14,7 +15,7 @@ const ResetPass = () => {
 
 
     // Gets global data from the context
-    const { crud, navigate, setLoading } = useContext(DataContext)
+    const { navigate, setLoading } = useContext(DataContext)
 
 
 

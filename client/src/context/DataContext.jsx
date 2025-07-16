@@ -6,11 +6,6 @@ import Loader from "../components/Loader/Loader";
 export const DataContext = createContext({ })
 
 const DataProvider = ({ children }) => {
-    // Sets the url for the backend server
-    axios.defaults.baseURL = 'https://meravalens.onrender.com/api'
-
-
-
     // Navigates users to different routes
     const navigate = useNavigate()
 
@@ -22,33 +17,6 @@ const DataProvider = ({ children }) => {
 
 
 
-    // Makes a CRUD operation to the backend server
-    const crud = async ({ url, method, body = null, headers = null }) => {
-        try {
-            const config = {
-                headers: access ? {
-                    'Authorization': `Bearer ${access}`,
-                    ...headers
-                } : {
-                    headers
-                }
-            }
-
-            let response;
-            if (method.toLowerCase() === 'get' || method.toLowerCase() === 'delete') {
-                response = await axios[method](url, config);
-            } else {
-                response = await axios[method](url, body, config);
-            }
-
-            if(response) return response
-        } catch(err) {
-            return err
-        }
-    }
-
-
-
     // Holds the loading state for the site
     const [loading, setLoading] = useState(false)
 
@@ -57,7 +25,7 @@ const DataProvider = ({ children }) => {
     return (
         <DataContext.Provider
             value={{
-                crud, navigate,
+                navigate,
                 access, setAccess, setRefresh,
                 setLoading
             }}

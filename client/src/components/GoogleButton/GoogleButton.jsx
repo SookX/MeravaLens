@@ -2,10 +2,11 @@ import { Stack } from "@mui/material";
 import { GoogleLogin } from "@react-oauth/google";
 import { useContext } from "react";
 import { DataContext } from "../../context/DataContext";
+import { crud } from "../../api/crud";
 
 const GoogleButton = ({ setError, text = "signin_with" }) => {
     // Gets global data from the context
-    const { crud, setAccess, setRefresh, navigate, setLoading } = useContext(DataContext)
+    const { setAccess, setRefresh, navigate, setLoading } = useContext(DataContext)
 
 
 

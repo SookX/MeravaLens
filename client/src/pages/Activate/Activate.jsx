@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom"
 import { DataContext } from "../../context/DataContext"
 import { theme } from "../../theme/theme"
 import { CheckCircleOutline, HighlightOff } from "@mui/icons-material"
+import { crud } from "../../api/crud"
 
 const Activate = () => {
     // Gets the url params
@@ -12,7 +13,7 @@ const Activate = () => {
 
 
     // Gets global data from the context
-    const { crud, access, navigate, setLoading } = useContext(DataContext)
+    const { access, navigate, setLoading } = useContext(DataContext)
 
 
 

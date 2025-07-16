@@ -3,10 +3,11 @@ import FormPage from "../FormPage/FormPage"
 import AccountForm from "../AccountForm/AccountForm"
 import { DataContext } from "../../context/DataContext"
 import AuthenticationMessage from "../AuthenticationMessage/AuthenticationMessage"
+import { crud } from "../../api/crud"
 
 const ForgotPass = () => {
     // Gets global data from the context
-    const { crud, setLoading } = useContext(DataContext)
+    const { setLoading } = useContext(DataContext)
     
 
 

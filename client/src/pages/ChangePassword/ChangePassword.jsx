@@ -2,10 +2,11 @@ import { useContext, useRef, useState } from "react"
 import AccountForm from "../../components/AccountForm/AccountForm"
 import FormPage from "../../components/FormPage/FormPage"
 import { DataContext } from "../../context/DataContext"
+import { crud } from "../../api/crud"
 
 const ChangePassword = () => {
     // Gets global data from the context
-    const { crud, setLoading, navigate } = useContext(DataContext)
+    const { setLoading, navigate } = useContext(DataContext)
 
 
 
