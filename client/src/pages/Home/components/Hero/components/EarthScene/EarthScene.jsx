@@ -1,8 +1,8 @@
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useContext, useEffect, useRef, useState } from "react"
 import { useGLTF } from "@react-three/drei"
-import { theme } from '../../../../theme/theme'
-import { DataContext } from '../../../../context/DataContext'
+import { theme } from '../../../../../../theme/theme'
+import { DataContext } from '../../../../../../context/DataContext'
 
 useGLTF.preload("/models/earth/earth.glb")
 

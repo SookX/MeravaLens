@@ -39,3 +39,8 @@ a {
 .footer-icon {
     width: 32px;
 }
+
+.about-img {
+    width: 100%;
+    border-radius: 10px;
+}
