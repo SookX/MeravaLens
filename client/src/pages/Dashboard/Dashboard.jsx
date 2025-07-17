@@ -46,11 +46,17 @@ const Dashboard = () => {
 
 
 
+    // Holds the error state
+    const [error, setError] = useState(null)
+
+
+
     // Resets the loading state
     useEffect(() => {
         if(image && segmentedImage && weather && airPollution && summary) {
             setAnalysis(true)
             setLoading(false)
+            setError(null)
         }
     }, [image, segmentedImage, weather, airPollution, summary])
 
@@ -115,6 +121,10 @@ const Dashboard = () => {
                 setAirPollution(response.data.air_pollution)
                 splitSummary(response.data.fastapi_result.analysis)
             }
+            else {
+                setError("Something went wrong with the analysis. Please try again.")
+                setLoading(false)
+            }
         }
 
         if(coords) fetching()
@@ -133,7 +143,7 @@ const Dashboard = () => {
                 summary
             }}
         >
-            <MapSection />
+            <MapSection error={error} />
 
             <Box ref={analysisRef}>
                 {
