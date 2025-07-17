@@ -219,6 +219,7 @@ GOOGLE_API_KEY='your-google-api-key'
 ```env
 VITE_GOOGLE_OAUTH2=your-google-oauth2-client-id
 VITE_GOOGLE_API_KEY="your-google-api-key"
+VITE_SERVER_BASE_URL = "your-server-base-url/api"
 ```
 
 ### Microservice (FastAPI)
