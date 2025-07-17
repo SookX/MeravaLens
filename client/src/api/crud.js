@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = 'http://127.0.0.1:8000/api'
+axios.defaults.baseURL = import.meta.env.VITE_SERVER_BASE_URL
 
 // Makes a CRUD operation to the backend server
 export const crud = async ({ url, method, body = null, headers = null }) => {
