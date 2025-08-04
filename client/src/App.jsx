@@ -1,18 +1,20 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import Home from "./pages/Home/Home"
 import { Box, ThemeProvider } from "@mui/material"
 import { theme } from "./theme/theme"
 import DataProvider from "./context/DataContext"
-import Register from "./pages/Register/Register"
-import Login from "./pages/Login/Login"
-import Activate from "./pages/Activate/Activate"
-import ResetPass from "./pages/ResetPass/ResetPass"
-import ForgotPass from "./components/ForgotPass/ForgotPass"
+import { lazyLoad } from "./lazyLoad"
+
+const Home = lazyLoad("./pages/Home/Home")
+const Register = lazyLoad("./pages/Register/Register")
+const Login = lazyLoad("./pages/Login/Login")
+const Activate = lazyLoad("./pages/Activate/Activate")
+const ResetPass = lazyLoad("./pages/ResetPass/ResetPass")
+const ForgotPass = lazyLoad("./components/ForgotPass/ForgotPass")
+const Dashboard = lazyLoad("./pages/Dashboard/Dashboard")
+const ChangePassword = lazyLoad("./pages/ChangePassword/ChangePassword")
+
 import { GoogleOAuthProvider } from "@react-oauth/google"
-import Dashboard from "./pages/Dashboard/Dashboard"
-import Header from "./components/Header/Header"
-import ChangePassword from "./pages/ChangePassword/ChangePassword"
-import Footer from "./components/Footer/Footer"
+import RouteWrapper from "./components/RouteWrapper/RouteWrapper"
 
 function App() {
   const clientId = import.meta.env.VITE_GOOGLE_OAUTH2
@@ -23,18 +25,18 @@ function App() {
         <BrowserRouter>
           <DataProvider>
             <GoogleOAuthProvider clientId={clientId}>
-              <Header />
               <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/activate/:uidb64/:token" element={<Activate />} />
-                <Route path="/forgot-password" element={<ForgotPass />} />
-                <Route path="/reset-password/:uidb64/:token" element={<ResetPass />} />
-                <Route path="/change-password" element={<ChangePassword />} />
-                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/" element={<RouteWrapper />}>
+                  <Route index element={<Home />} />
+                  <Route path="register" element={<Register />} />
+                  <Route path="login" element={<Login />} />
+                  <Route path="activate/:uidb64/:token" element={<Activate />} />
+                  <Route path="forgot-password" element={<ForgotPass />} />
+                  <Route path="reset-password/:uidb64/:token" element={<ResetPass />} />
+                  <Route path="change-password" element={<ChangePassword />} />
+                  <Route path="dashboard" element={<Dashboard />} />
+                </Route>
               </Routes>
-              <Footer />
             </GoogleOAuthProvider>
           </DataProvider>
         </BrowserRouter>
