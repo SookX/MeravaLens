@@ -4,23 +4,23 @@ import { theme } from "./theme/theme"
 import DataProvider from "./context/DataContext"
 import { lazyLoad } from "./lazyLoad"
 
-import Home from "./pages/Home/Home"
-import Register from "./pages/Register/Register"
-import Login from "./pages/Login/Login"
-import Activate from "./pages/Activate/Activate"
-import ResetPass from "./pages/ResetPass/ResetPass"
-import ForgotPass from "./components/ForgotPass/ForgotPass"
-import Dashboard from "./pages/Dashboard/Dashboard"
-import ChangePassword from "./pages/ChangePassword/ChangePassword"
+// import Home from "./pages/Home/Home"
+// import Register from "./pages/Register/Register"
+// import Login from "./pages/Login/Login"
+// import Activate from "./pages/Activate/Activate"
+// import ResetPass from "./pages/ResetPass/ResetPass"
+// import ForgotPass from "./components/ForgotPass/ForgotPass"
+// import Dashboard from "./pages/Dashboard/Dashboard"
+// import ChangePassword from "./pages/ChangePassword/ChangePassword"
 
-// const Home = lazyLoad("./pages/Home/Home")
-// const Register = lazyLoad("./pages/Register/Register")
-// const Login = lazyLoad("./pages/Login/Login")
-// const Activate = lazyLoad("./pages/Activate/Activate")
-// const ResetPass = lazyLoad("./pages/ResetPass/ResetPass")
-// const ForgotPass = lazyLoad("./components/ForgotPass/ForgotPass")
-// const Dashboard = lazyLoad("./pages/Dashboard/Dashboard")
-// const ChangePassword = lazyLoad("./pages/ChangePassword/ChangePassword")
+const Home = lazyLoad("/src/pages/Home/Home")
+const Register = lazyLoad("/src/pages/Register/Register")
+const Login = lazyLoad("/src/pages/Login/Login")
+const Activate = lazyLoad("/src/pages/Activate/Activate")
+const ResetPass = lazyLoad("/src/pages/ResetPass/ResetPass")
+const ForgotPass = lazyLoad("/src/components/ForgotPass/ForgotPass")
+const Dashboard = lazyLoad("/src/pages/Dashboard/Dashboard")
+const ChangePassword = lazyLoad("/src/pages/ChangePassword/ChangePassword")
 
 import { GoogleOAuthProvider } from "@react-oauth/google"
 import RouteWrapper from "./components/RouteWrapper/RouteWrapper"
