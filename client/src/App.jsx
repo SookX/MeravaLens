@@ -3,6 +3,7 @@ import { Box, ThemeProvider } from "@mui/material"
 import { theme } from "./theme/theme"
 import DataProvider from "./context/DataContext"
 import { lazyLoad } from "./lazyLoad"
+import { lazy } from "react"
 
 // import Home from "./pages/Home/Home"
 // import Register from "./pages/Register/Register"
@@ -13,14 +14,23 @@ import { lazyLoad } from "./lazyLoad"
 // import Dashboard from "./pages/Dashboard/Dashboard"
 // import ChangePassword from "./pages/ChangePassword/ChangePassword"
 
-const Home = lazyLoad("/src/pages/Home/Home")
-const Register = lazyLoad("/src/pages/Register/Register")
-const Login = lazyLoad("/src/pages/Login/Login")
-const Activate = lazyLoad("/src/pages/Activate/Activate")
-const ResetPass = lazyLoad("/src/pages/ResetPass/ResetPass")
-const ForgotPass = lazyLoad("/src/components/ForgotPass/ForgotPass")
-const Dashboard = lazyLoad("/src/pages/Dashboard/Dashboard")
-const ChangePassword = lazyLoad("/src/pages/ChangePassword/ChangePassword")
+// const Home = lazyLoad("./pages/Home/Home")
+// const Register = lazyLoad("./pages/Register/Register")
+// const Login = lazyLoad("./pages/Login/Login")
+// const Activate = lazyLoad("./pages/Activate/Activate")
+// const ResetPass = lazyLoad("./pages/ResetPass/ResetPass")
+// const ForgotPass = lazyLoad("./components/ForgotPass/ForgotPass")
+// const Dashboard = lazyLoad("./pages/Dashboard/Dashboard")
+// const ChangePassword = lazyLoad("./pages/ChangePassword/ChangePassword")
+
+const Home = lazy(() => import("./pages/Home/Home"))
+const Register = lazy(() => import("./pages/Register/Register"))
+const Login = lazy(() => import("./pages/Login/Login"))
+const Activate = lazy(() => import("./pages/Activate/Activate"))
+const ResetPass = lazy(() => import("./pages/ResetPass/ResetPass"))
+const ForgotPass = lazy(() => import("./components/ForgotPass/ForgotPass"))
+const Dashboard = lazy(() => import("./pages/Dashboard/Dashboard"))
+const ChangePassword = lazy(() => import("./pages/ChangePassword/ChangePassword"))
 
 import { GoogleOAuthProvider } from "@react-oauth/google"
 import RouteWrapper from "./components/RouteWrapper/RouteWrapper"
