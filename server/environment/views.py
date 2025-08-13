@@ -67,7 +67,6 @@ def environmental_data(request):
             json=post_payload,
             # timeout=timeout
         )
-        print("dfeg")
         fastapi_response.raise_for_status()
 
 
@@ -84,3 +83,4 @@ def environmental_data(request):
 
     except requests.exceptions.RequestException as e:
         return Response({'error': str(e)}, status=status.HTTP_502_BAD_GATEWAY)
+
