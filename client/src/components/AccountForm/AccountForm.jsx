@@ -1,4 +1,4 @@
-import { Button, Card, Checkbox, Divider, FormControlLabel, Stack, styled, TextField, Typography } from "@mui/material"
+import { Button, Card, Checkbox, Divider, FormControl, FormControlLabel, Stack, styled, TextField, Typography } from "@mui/material"
 import { theme } from "../../theme/theme"
 import { Link } from "react-router-dom"
 
@@ -48,45 +48,47 @@ const AccountForm = ({
     return (
         <FormSection>
             <FormCard>
-                <Stack mb={{ xs: 3, md: 4 }}>
-                    <Typography variant="h3" color="primary">{title}</Typography>
-                    <Typography variant="body1">{text}</Typography>
-                    { error && <Typography variant="body1" color="error">{error}</Typography> }
-                </Stack>
+                    <Stack mb={{ xs: 3, md: 4 }}>
+                        <Typography variant="h3" color="primary">{title}</Typography>
+                        <Typography variant="body1">{text}</Typography>
+                        { error && <Typography variant="body1" color="error">{error}</Typography> }
+                    </Stack>
 
-                <Stack gap={{ xs: 1, md: 2 }}>
-                    {
-                        inputs.map((input, i) => (
-                            <TextField
-                                key={i}
-                                type={input.type}
-                                variant="outlined"
-                                label={input.label}
-                                inputRef={input.ref}
+                <form onSubmit={handleSubmit}>
+                    <Stack gap={{ xs: 1, md: 2 }}>
+                        {
+                            inputs.map((input, i) => (
+                                <TextField
+                                    key={i}
+                                    type={input.type}
+                                    variant="outlined"
+                                    label={input.label}
+                                    inputRef={input.ref}
+                                    autoComplete={input.label}
+                                />
+                            ))
+                        }
+                    </Stack>
+
+                    <Stack mt={{ xs: 1, md: 2 }} direction="row" alignItems="center" justifyContent="space-between">
+                        {
+                            rememberMeRef !== null &&
+                            <FormControlLabel 
+                                control={
+                                    <Checkbox color="primary" inputRef={rememberMeRef} />
+                                } 
+                                label="Remember me" 
                             />
-                        ))
-                    }
-                </Stack>
+                        }
 
-                <Stack mt={{ xs: 1, md: 2 }} direction="row" alignItems="center" justifyContent="space-between">
-                    {
-                        rememberMeRef !== null &&
-                        <FormControlLabel 
-                            control={
-                                <Checkbox color="primary" inputRef={rememberMeRef} />
-                            } 
-                            label="Remember me" 
-                        />
-                    }
+                        {
+                            forgotPassword &&
+                            <Link to="/forgot-password"><ForgotPassword variant="body1" color="primary">Forgot Password</ForgotPassword></Link>
+                        }
+                    </Stack>
 
-                    {
-                        forgotPassword &&
-                        <Link to="/forgot-password"><ForgotPassword variant="body1" color="primary">Forgot Password</ForgotPassword></Link>
-                    }
-                </Stack>
-
-                <Button sx={{ marginTop: 2 }} fullWidth size="large" variant="contained" onClick={handleSubmit}>{buttonLabel}</Button>
-
+                    <Button type="submit" sx={{ marginTop: 2 }} fullWidth size="large" variant="contained">{buttonLabel}</Button>
+                </form>
                 {
                     oauth &&
                     <>
