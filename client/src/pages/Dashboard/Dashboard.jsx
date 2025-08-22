@@ -21,7 +21,7 @@ const Dashboard = () => {
 
     // Checks if the user is authenticated
     useEffect(() => {
-        // if(!access) navigate('/login')
+        if(!access) navigate('/login')
     }, [access])
 
 
