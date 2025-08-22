@@ -148,7 +148,7 @@ const Header = () => {
                     </Stack>
                 </StyledDialogContent>
             </Dialog>
-            <Toolbar disableGutters justifyContent="space-between">
+            <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
                 <Box sx={{ flexGrow: 1 }}>
                     <Link to='/'>
                         <img className="nav-logo" src={logo} alt="Merava Lens logo" />
