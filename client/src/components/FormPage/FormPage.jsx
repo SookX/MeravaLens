@@ -1,29 +1,30 @@
 import { Box, Grid, styled } from "@mui/material"
-import { theme } from "../../theme/theme"
 import satellite from "../../img/satellite.webp"
 
 
 const FormPage = ({ children }) => {
     const Section = styled(Grid)(({ theme })=>({
-        height: "100vh"
+        minHeight: "100vh"
     }))
 
 
-    const Image = styled(Box)({
+    const ImageBox = styled(Box)({
         height: "100vh",
-        backgroundImage: `url(${satellite})`,
-        backgroundSize: "cover",
-        backgroundPosition: "right"
+        width: "100%",
+        position: "sticky",
+        top: 0
     })
     
 
     return (
         <Section container>
-            <Grid size={{ md: 4, lg: 5 }}>
-                <Image />
+            <Grid size={{ xs: 0, md: 4, lg: 5 }}>
+                <ImageBox>
+                    <img src={satellite} alt="Satellite" className="form-img" />
+                </ImageBox>
             </Grid>
             <Grid size="grow">
-                <Box sx={{ height: "100vh", overflow: "auto" }}>
+                <Box sx={{  }}>
                     { children }
                 </Box>
             </Grid>
