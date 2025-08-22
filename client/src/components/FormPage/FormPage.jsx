@@ -1,20 +1,9 @@
-import { Box, Grid, styled } from "@mui/material"
+import { Box, Grid } from "@mui/material"
 import satellite from "../../img/satellite.webp"
+import { ImageBox, Section } from "./styling"
 
 
 const FormPage = ({ children }) => {
-    const Section = styled(Grid)(({ theme })=>({
-        minHeight: "100vh"
-    }))
-
-
-    const ImageBox = styled(Box)({
-        height: "100vh",
-        width: "100%",
-        position: "sticky",
-        top: 0
-    })
-    
 
     return (
         <Section container>

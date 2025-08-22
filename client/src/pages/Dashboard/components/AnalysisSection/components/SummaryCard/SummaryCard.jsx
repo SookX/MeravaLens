@@ -1,27 +1,11 @@
 import { useContext } from "react"
 import { DashboardContext } from "../../../../Dashboard"
-import { Box, Card, IconButton, Stack, styled, Tooltip, Typography } from "@mui/material"
-import { theme } from "../../../../../../theme/theme"
-import { HelpOutline } from "@mui/icons-material"
+import { Box, IconButton, Stack, Tooltip, Typography } from "@mui/material"
+import { Icon, StyledCard } from "./styling"
 
 const SummaryCard = () => {
     // Gets dashboard data
     const { summary } = useContext(DashboardContext)
-
-
-
-    const StyledCard = styled(Card)(({ theme }) => ({
-        padding: theme.spacing(3)
-    }))
-
-
-
-    const Icon = styled(HelpOutline)(({ theme })=>({
-        color: theme.palette.primary.main,
-        cursor: "pointer",
-        width: theme.spacing(2),
-        height: theme.spacing(2)
-    }))
 
 
     

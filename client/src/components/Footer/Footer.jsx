@@ -1,46 +1,11 @@
-import { BottomNavigation, Box, Divider, Link, Stack, styled, Typography } from "@mui/material"
+import { Link, Typography } from "@mui/material"
 import logo from "../../img/logo.webp"
 import devpost from "../../img/devpost.svg"
 import github from "../../img/github.svg"
 import { theme } from "../../theme/theme"
+import { StyledFooter, IconContainer, StyledDivider } from "./styling"
 
 const Footer = () => {
-    const StyledFooter = styled(Stack)(({ theme }) => ({
-        backgroundColor: theme.palette.background.mid,
-        alignItems: "center",
-        justifyContent: "center",
-        position: "relative",
-        textAlign: "center",
-
-        padding: `${theme.spacing(5)} ${theme.spacing(1)}`
-    }))
-
-
-    const IconContainer = styled(Stack)(({ theme }) => ({
-        position: "absolute",
-        [theme.breakpoints.down("md")]: {
-            position: "static",
-            flexDirection: "row",
-            gap: theme.spacing(1),
-            marginBottom: theme.spacing(2)
-        },
-
-        top: 0,
-        left: theme.spacing(4),
-        alignItems: "center",
-    }))
-
-
-    const StyledDivider = styled(Box)(({ theme }) => ({
-        borderRight: `solid 1px ${theme.palette.primary.dark}`,
-        height: theme.spacing(2),
-
-        [theme.breakpoints.down("md")]: {
-            display: "none"
-        }
-    }))
-
-
 
     return (
         <StyledFooter>

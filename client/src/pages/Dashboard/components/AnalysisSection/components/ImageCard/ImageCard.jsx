@@ -1,26 +1,12 @@
-import { Box, Card, Stack, styled, Typography } from "@mui/material"
-import { theme } from "../../../../../../theme/theme"
+import { Box, Stack, Typography } from "@mui/material"
 import { useContext } from "react"
 import { DashboardContext } from "../../../../Dashboard"
+import { ImageContainer, StyledCard } from "./styling"
 
 
 const ImageCard = () => {
     // Gets dashboard data
     const { image, segmentedImage } = useContext(DashboardContext)
-
-
-
-    const StyledCard = styled(Card)(({ theme })=>({
-        padding: `${theme.spacing(4)} ${theme.spacing(4)}`,
-        height: "100%"
-    }))
-
-
-
-    const ImageContainer = styled(Box)(({ theme })=>({
-        borderRadius: theme.shape.borderRadius,
-        overflow: "hidden"
-    }))
 
 
 

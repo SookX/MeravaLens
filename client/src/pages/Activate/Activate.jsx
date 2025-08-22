@@ -1,10 +1,10 @@
-import { Box, Button, Divider, Stack, styled, Typography } from "@mui/material"
+import { Box, Button, Stack, Typography } from "@mui/material"
 import { useContext, useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { DataContext } from "../../context/DataContext"
 import { theme } from "../../theme/theme"
-import { CheckCircleOutline, HighlightOff } from "@mui/icons-material"
 import { crud } from "../../api/crud"
+import { Circle, IconError, IconSuccess, Section, StyledDivider } from "./styling"
 
 const Activate = () => {
     // Gets the url params
@@ -51,72 +51,6 @@ const Activate = () => {
 
         activate()
     }, [])
-
-
-
-    const Section = styled(Stack)(({theme})=>({
-        padding: `${theme.spacing(20)} ${theme.spacing(25)}`,
-        [theme.breakpoints.down("md")]: { padding: `${theme.spacing(16)} ${theme.spacing(12)}` },
-        [theme.breakpoints.down("sm")]: { padding: `${theme.spacing(12)} ${theme.spacing(4)}` },
-
-        textAlign: "center",
-        alignItems: "center",
-        justifyContent: "center",
-        minHeight: "100vh",
-        zIndex: 1
-    }))
-
-
-    const IconSuccess = styled(CheckCircleOutline)(({ theme })=>({
-        width: theme.spacing(20),
-        height: theme.spacing(20),
-        
-        [theme.breakpoints.down("lg")]: {
-            width: theme.spacing(16),
-            height: theme.spacing(16)
-        },
-
-        [theme.breakpoints.down("sm")]: {
-            width: theme.spacing(12),
-            height: theme.spacing(12)
-        },
-
-        marginBottom: theme.spacing(2)
-    }))
-
-
-    const IconError = styled(HighlightOff)(({ theme })=>({
-        width: theme.spacing(20),
-        height: theme.spacing(20),
-
-        [theme.breakpoints.down("lg")]: {
-            width: theme.spacing(16),
-            height: theme.spacing(16)
-        },
-
-        [theme.breakpoints.down("sm")]: {
-            width: theme.spacing(12),
-            height: theme.spacing(12)
-        },
-
-        marginBottom: theme.spacing(2)
-    }))
-
-
-
-    const Circle = styled(Box)(({ theme })=>({
-        aspectRatio: "1 / 1",
-        border: `solid 1px ${theme.palette.text.dark}`,
-        borderRadius: "100%",
-        position: "absolute",
-        zIndex: 0
-    }))
-
-
-    const StyledDivider = styled(Divider)(({ theme })=>({
-        width: theme.spacing(6),
-        background: theme.palette.primary.main
-    }))
 
 
 

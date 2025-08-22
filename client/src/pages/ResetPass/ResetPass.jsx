@@ -1,7 +1,6 @@
 import { useContext, useRef, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { DataContext } from "../../context/DataContext"
-import { theme } from "../../theme/theme"
 import FormPage from "../../components/FormPage/FormPage"
 import AccountForm from "../../components/AccountForm/AccountForm"
 import { crud } from "../../api/crud"

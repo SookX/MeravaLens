@@ -1,11 +1,11 @@
-import { AppBar, Box, Button, Card, Dialog, DialogContent, List, Stack, styled, Toolbar, Typography } from "@mui/material"
+import { AppBar, Box, Button, Dialog, List, Stack, Toolbar, Typography } from "@mui/material"
 import logo from "../../img/logo.webp"
 import { Link, useNavigate } from "react-router-dom"
 import { useContext, useEffect, useState } from "react"
 import { DataContext } from "../../context/DataContext"
 import { ArrowDropDown } from "@mui/icons-material"
-import { theme } from "../../theme/theme"
 import { crud } from "../../api/crud"
+import { UserBox, Dropdown, DropdownCard, StyledDialogContent } from "./styling"
 
 const Header = () => {
     // Gets global data from the context
@@ -102,37 +102,6 @@ const Header = () => {
 
         return () => window.removeEventListener("scroll", () => handleChangeColor())
     }, [])
-
-
-
-    const UserBox = styled(Stack)(({ theme })=>({
-        flexDirection: "row",
-        gap: theme.spacing(1),
-        alignItems: "center",
-        cursor: "pointer",
-        position: "relative"
-    }))
-
-
-    const Dropdown = styled(Box)(({ theme })=>({
-        position: "absolute",
-        bottom: 0,
-        transform: "translateY(100%)",
-        width: "100%",
-        paddingTop: theme.spacing(1),
-        cursor: "default"
-    }))
-
-
-    const DropdownCard = styled(Card)(({ theme })=>({
-        padding: theme.spacing(1),
-        textAlign: "center"
-    }))
-
-
-    const StyledDialogContent = styled(DialogContent)(({ theme })=>({
-        textAlign: "center",
-    }))
 
 
 

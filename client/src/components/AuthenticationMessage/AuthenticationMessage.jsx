@@ -1,7 +1,6 @@
-import { Button, Card, Dialog, styled, Typography } from "@mui/material"
-import { theme } from "../../theme/theme"
-import { MailOutline } from "@mui/icons-material"
+import { Button, Dialog, Typography } from "@mui/material"
 import { Link } from "react-router-dom"
+import { DialogBox } from "./styling"
 
 const AuthenticationMessage = ({ 
     open = false,
@@ -11,15 +10,6 @@ const AuthenticationMessage = ({
     message = "",
     text = ""
 }) => {
-    const DialogBox = styled(Card)(({ theme })=>({
-        padding: `${theme.spacing(4)} ${theme.spacing(3)}`,
-        textAlign: "center"
-    }))
-
-    const MailIcon = styled(MailOutline)(({ theme })=>({
-        width: theme.spacing(3),
-        height: theme.spacing(3)
-    }))
 
     return (
         <Dialog
